@@ -83,13 +83,13 @@ else {
 코드를 들여쓰기(indentation)할 때는 여백 둘을 사용  
 탭(tab)을 사용하거나 탭과 여백을 혼용하여 사용하지 말 것  
 유일한 예외는 여러 줄에 걸쳐 함수를 정의하는 경우로, 이 경우에는 함수 정의가 시작되는 위치에 맞춰 두 번째 줄에 들여쓰기를 할 것
-<pre><code>
+'''
 long_function_name <- function(a = "a long arguement",
                                b = "another argument",
                                c = "another long argument") {
   \# 보통의 코드처럼 두 개의 여백으로 들여쓰기                               
 }
-<\/pre></code>
+'''
 
 ## 할당
 할당에는 =를 사용하지 말고, <-를 사용
@@ -103,5 +103,5 @@ long_function_name <- function(a = "a long arguement",
 주석의 각 줄은 주석 표시(#)와 여백 하나로 시작해야함
 주석은 목적이 아니라 이유를 설명
 파일을 분해해 쉽게 읽을 수 있는 묶음(chunks)으로 만들기 위해 -와 =로 주석이 달린 줄을 사용
-<pre><code># Load data -----------------------<\/pre></code>
+<pre><code># Load data -----------------------<//pre></code>
 <code># Plot data -----------------------</code>
