@@ -4,11 +4,14 @@ type: about
 ---
 
 # About...
-Ro, Yeomyung
+Ro, Yeomyung  
 South Korea, Seoul
 
 # Interests
-Data Science / Machine Learning / Data Mining / Artificial Intelligence
+* Data Science
+* Machine Learning
+* Data Mining
+* Artificial Intelligence
 
 # Education
 * 2017.03 ~ 2019.02 : Business Analytics, UNIST(Ulsan National Institute of Science and Technology)
@@ -28,3 +31,4 @@ Data Science / Machine Learning / Data Mining / Artificial Intelligence
 * Data Mining
 * Text Mining
 * Social Analysis
+* ETC
