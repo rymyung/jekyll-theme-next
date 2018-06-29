@@ -89,7 +89,7 @@ long_function_name <- function(a = "a long arguement",
                                c = "another long argument") {
   \# 보통의 코드처럼 두 개의 여백으로 들여쓰기                               
 }
-<'pre></code>
+</pre></code>
 
 ## 할당
 할당에는 =를 사용하지 말고, <-를 사용
