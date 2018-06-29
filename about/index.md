@@ -14,11 +14,11 @@ South Korea, Seoul
 * Artificial Intelligence
 
 # Education
-> 2017.03 ~ 2019.02 : Business Analytics, UNIST(Ulsan National Institute of Science and Technology)
+> 2017.03 ~ 2019.02 : Business Analytics, UNIST(Ulsan National Institute of Science and Technology)  
   2011.03 ~ 2017.02 : Industrial Engineering, Hongik University
 
 # Experience
-> 2018.01 ~ 2018.02 : HMD(Hyundai Mipo Dockyard) - Data Analyst Internship
+> 2018.01 ~ 2018.02 : HMD(Hyundai Mipo Dockyard) - Data Analyst Internship  
   2017.06 ~ 2017.12 : Beekave(Social Review) - Data Analyst Intership
 
 # Skill
