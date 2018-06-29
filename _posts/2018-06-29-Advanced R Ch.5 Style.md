@@ -103,5 +103,5 @@ long_function_name <- function(a = "a long arguement",
 주석의 각 줄은 주석 표시(#)와 여백 하나로 시작해야함
 주석은 목적이 아니라 이유를 설명
 파일을 분해해 쉽게 읽을 수 있는 묶음(chunks)으로 만들기 위해 -와 =로 주석이 달린 줄을 사용
-<code># Load data -----------------------</code>
+<pre><code># Load data -----------------------</pre></code>
 <code># Plot data -----------------------</code>
