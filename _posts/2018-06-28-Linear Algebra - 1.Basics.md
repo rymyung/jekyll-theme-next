@@ -1,14 +1,11 @@
 ---
-title: 선형대수 - 1장 : 선형대수 기초
+title: Linear Algebra - Chapter 1. Basics
 date: 2018-06-28 23:29:53
 categories:
 - Linear Algebra
-- 선형대수
 tags:
 - Linear Algebra
-- 선형대수
 - Python
-- 파이썬
 ---
 
 # Chapter 1. Basic for Linear Algebra
