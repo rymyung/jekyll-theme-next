@@ -6,7 +6,7 @@
 # Site
 title: Ro's Data Science Lab
 subtitle: Let's Get It!!!
-description: Interested in Data Science / Machine Learning / Data Mining
+description: Interested in * Data Science \n * Machine Learning \n * Data Mining
 author: Ro, Yeomyung
 # Support language: de, en, fr-FR, id, ja, ko, pt-BR, pt, ru, zh-Hans, zh-hk, zh-tw
 language: en
@@ -79,7 +79,7 @@ plugins:
 favicon: /assets/favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Jekyll, NexT"
+keywords: "Data Science, Machine Learning, Data Mining"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -87,7 +87,7 @@ keywords: "Jekyll, NexT"
 rss:
 
 # Specify the date when the site was setup
-#since: 2015
+#since: 2018-06-28
 
 # icon between year and author @Footer
 authoricon: heart
@@ -226,9 +226,9 @@ social_icons:
   enable: true
   # Icon Mappings.
   # KeyMapsToSocialItemKey: NameOfTheIconFromFontAwesome
-  GitHub: github
-  Twitter: twitter
-  Weibo: weibo
+  GitHub: https://github.com/rymyung #github
+  #Twitter: twitter
+  #Weibo: weibo
 
 
 # Sidebar Avatar
@@ -256,8 +256,8 @@ toc:
 
 sidebar:
   # Sidebar Position, available value: left | right
-  position: left
-  #position: right
+  #position: left
+  position: right
 
   # Sidebar Display, available value:
   #  - post    expand on posts automatically. Default.
