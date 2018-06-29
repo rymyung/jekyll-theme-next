@@ -1,3 +1,12 @@
+---
+title: Python for ML - Chapter 1. Pythonic Code
+date: 2018-06-28 23:29:53
+categories:
+- Python for ML
+tags:
+- Programming
+- Python
+---
 
 # Chapter 1. Pythonic Code
 
@@ -199,7 +208,7 @@ print("a : {}, \nb : {}, \nc : {}".format(a,b,c))
 
 ### 4.1 Lambda
 함수 이름 없이, 함수처럼 사용할 수 있는 익명함수
-<pre><code>lambda arg1, arg2, ... : expression </pre></code>
+<code>lambda arg1, arg2, ... : expression</code>
 
 
 ```python
@@ -232,7 +241,7 @@ print((lambda x : x**2)(5))
 
 ### 4.2 Map function
 Sequence 자료형(list, tuple, ...) 각 element에 동일한 function을 적용
-<pre><code> map(function, list1, list2, ...) </pre></code> map object로 반환하기 때문에 반환값에 list()를 사용
+<code> map(function, list1, list2, ...) </code> map object로 반환하기 때문에 반환값에 list()를 사용
 
 
 ```python
