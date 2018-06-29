@@ -1,3 +1,11 @@
+---
+title: Advanced R - Chapter 5. Style
+date: 2018-06-29 23:12:00
+categories:
+- Programming
+tags:
+- R
+---
 
 다음 가이드는 구글의 R 스타일 가이드([Link](http://google.github.io/styleguide/Rguide.xml))을 기반으로 함
 
