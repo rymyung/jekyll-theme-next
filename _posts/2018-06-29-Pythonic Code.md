@@ -3,7 +3,7 @@ title: Python for ML - Chapter 1. Pythonic Code
 date: 2018-06-28 23:29:53
 categories:
 - Lecture
-    - Python for ML
+- Python for ML
 tags:
 - Python
 ---
