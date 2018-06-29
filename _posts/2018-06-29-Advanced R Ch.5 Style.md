@@ -34,46 +34,46 @@ tags:
 ## 여백 주기
 모든 삽입 연산자(=, +, -, <- 등) 주위에 여백(spaces)을 사용  
 쉼표(,) 뒤에 항상 여백 삽입
-* 좋은 경우 : <pre><code>average <- mean(feet / 12 + inches, narm = TRUE)</pre></code>  
-* 나쁜 경우 : <pre><code>average<-mean(feet/12+inches,na.rm=TRUE)</pre></code>
+* 좋은 경우 : <code>average <- mean(feet / 12 + inches, narm = TRUE)</code>  
+* 나쁜 경우 : <code>average<-mean(feet/12+inches,na.rm=TRUE)</code>
 
 이 규칙의 예외로 :, ::, 그리고 :::은 여백이 필요 없음
-* 좋은 경우 : <pre><code>base::get</pre></code>
-* 나쁜 경우 : <pre><code>base :: get</pre></code>
+* 좋은 경우 : <code>base::get</code>
+* 나쁜 경우 : <code>base :: get</code>
 
 여백은 함수를 호출할 때는 넣지 않고, 왼쪽 괄호 앞에는 넣음
-* 좋은 경우 : <pre><code>if (debug) do(x)
-plot(x, y)</pre></code>
-* 나쁜 경우 : <pre><code>if(debug)do(x)
-plot (x, y)</pre></code>
+* 좋은 경우 : <code>if (debug) do(x)
+plot(x, y)</code>
+* 나쁜 경우 : <code>if(debug)do(x)
+plot (x, y)</code>
 
 등호나 할당(<\-)의 정렬을 개선하기 위해서라면, 추가 여백을 허용
-<pre><code>list(total = a + b + c,
-mean  = (a + b + c) / n)</pre></code>
+<code>list(total = a + b + c,
+mean  = (a + b + c) / n)</code>
 
 ## 중괄호
 중괄호가 시작되면 코드는 그 줄에서 끝나지 않고 새로운 줄이 이어짐  
 중괄호를 닫으면 else가 뒤따르지 않는 한 그 줄에서 끝남
 중괄호 안에서는 항상 들여쓰기 사용
-* 좋은 경우 : <pre><code>if (y < 0 && debug) {
+* 좋은 경우 : <code>if (y < 0 && debug) {
     message("Y is negative")
 }
 if (y == 0) {
     log(x)
 } else {
     y ^ x
-}</pre></code>
-* 나쁜 경우 : <pre><code>if (y < 0 && debug)
+}</code>
+* 나쁜 경우 : <code>if (y < 0 && debug)
 message("Y is negative")
 if (y == 0) {
     log(x)
 }
 else {
     y ^ x
-}</pre></code>
+}</code>
 
 매우 짧은 구문을 한 줄에 쓰는 것은 허용
-<pre><code>if (y < 0 && debug) message("Y is negative")</pre></code>
+<code>if (y < 0 && debug) message("Y is negative")</code>
 
 ## 줄 길이
 코드를 가능한 한 줄에 80문자 이내로 한정  
@@ -83,18 +83,18 @@ else {
 코드를 들여쓰기(indentation)할 때는 여백 둘을 사용  
 탭(tab)을 사용하거나 탭과 여백을 혼용하여 사용하지 말 것  
 유일한 예외는 여러 줄에 걸쳐 함수를 정의하는 경우로, 이 경우에는 함수 정의가 시작되는 위치에 맞춰 두 번째 줄에 들여쓰기를 할 것
-<pre><code>
+<code>
 long_function_name <- function(a = "a long arguement",
                                b = "another argument",
                                c = "another long argument") {
   \# 보통의 코드처럼 두 개의 여백으로 들여쓰기                               
 }
-</pre></code>
+</code>
 
 ## 할당
 할당에는 =를 사용하지 말고, <-를 사용
-* 좋은 경우 : <pre><code>x <- 5</pre></code>
-* 나쁜 경우 : <pre><code>x = 5</pre></code>
+* 좋은 경우 : <code>x <- 5</code>
+* 나쁜 경우 : <code>x = 5</code>
 
 # 조직화
 
@@ -103,5 +103,5 @@ long_function_name <- function(a = "a long arguement",
 주석의 각 줄은 주석 표시(#)와 여백 하나로 시작해야함
 주석은 목적이 아니라 이유를 설명
 파일을 분해해 쉽게 읽을 수 있는 묶음(chunks)으로 만들기 위해 -와 =로 주석이 달린 줄을 사용
-<pre><code># Load data -----------------------</pre></code>
-<pre><code># Plot data -----------------------</pre></code>
+<code># Load data -----------------------</code>
+<code># Plot data -----------------------</code>
