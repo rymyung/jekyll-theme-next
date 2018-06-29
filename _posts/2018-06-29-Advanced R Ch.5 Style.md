@@ -55,25 +55,33 @@ mean  = (a + b + c) / n)</code>
 중괄호가 시작되면 코드는 그 줄에서 끝나지 않고 새로운 줄이 이어짐  
 중괄호를 닫으면 else가 뒤따르지 않는 한 그 줄에서 끝남
 중괄호 안에서는 항상 들여쓰기 사용
-* 좋은 경우 : ```if (y < 0 && debug) {
+* 좋은 경우 : 
+```
+if (y < 0 && debug) {
     message("Y is negative")
 }
 if (y == 0) {
     log(x)
 } else {
     y ^ x
-}```
-* 나쁜 경우 : ```if (y < 0 && debug)
+}
+```
+* 나쁜 경우 : 
+```
+if (y < 0 && debug)
 message("Y is negative")
 if (y == 0) {
     log(x)
 }
 else {
     y ^ x
-}```
+}
+```
 
 매우 짧은 구문을 한 줄에 쓰는 것은 허용
-```if (y < 0 && debug) message("Y is negative")```
+```
+if (y < 0 && debug) message("Y is negative")
+```
 
 ## 줄 길이
 코드를 가능한 한 줄에 80문자 이내로 한정  
@@ -103,7 +111,5 @@ long_function_name <- function(a = "a long arguement",
 주석의 각 줄은 주석 표시(#)와 여백 하나로 시작해야함
 주석은 목적이 아니라 이유를 설명
 파일을 분해해 쉽게 읽을 수 있는 묶음(chunks)으로 만들기 위해 -와 =로 주석이 달린 줄을 사용
-```
-\# Load data -----------------------
-\# Plot data -----------------------
-```
+``` # Load data ----------------------- ```
+``` # Plot data ----------------------- ```
