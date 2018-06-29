@@ -83,13 +83,13 @@ else {
 코드를 들여쓰기(indentation)할 때는 여백 둘을 사용  
 탭(tab)을 사용하거나 탭과 여백을 혼용하여 사용하지 말 것  
 유일한 예외는 여러 줄에 걸쳐 함수를 정의하는 경우로, 이 경우에는 함수 정의가 시작되는 위치에 맞춰 두 번째 줄에 들여쓰기를 할 것
-'''
+```
 long_function_name <- function(a = "a long arguement",
                                b = "another argument",
                                c = "another long argument") {
   \# 보통의 코드처럼 두 개의 여백으로 들여쓰기                               
 }
-'''
+```
 
 ## 할당
 할당에는 =를 사용하지 말고, <-를 사용
