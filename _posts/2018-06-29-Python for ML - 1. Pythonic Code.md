@@ -242,8 +242,9 @@ print((lambda x : x**2)(5))
     
 
 ## Map function
-Sequence 자료형(list, tuple, ...) 각 element에 동일한 function을 적용
-<pre><code> map(function, list1, list2, ...) </pre></code> map object로 반환하기 때문에 반환값에 list()를 사용
+Sequence 자료형(list, tuple, ...) 각 element에 동일한 function을 적용  
+<code> map(function, list1, list2, ...) </code>  
+map object로 반환하기 때문에 반환값에 list()를 사용
 
 
 ```python
