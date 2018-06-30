@@ -10,17 +10,16 @@ tags:
 이 포스트는 ['머신러닝을 위한 Python'](https://www.edwith.org/aipython/joinLectures/14365) 강의의 Chapter 2 Pythonic Code를 요약한 내용입니다
 
 
-# Pythonic Code
 Pythonic Code : 다른 사람의 코드를 잘 이해하기 위해서 파이썬 특유의 문법을 활용하여 효율적으로 코드를 표현하는 기법
 
-## Split & Join
+# Split & Join
 * Split
 * Join
 * String
 * List
 * Unpacking
 
-### Split
+## Split
 String Type의 값을 나눠서 List 형태로 반환
 
 
@@ -52,7 +51,7 @@ print("first : {}, \nsecond : {}, \nthird : {}".format(a,b,c))
     third : javascript
     
 
-### Join
+## Join
 
 
 ```python
@@ -64,7 +63,7 @@ print(result)
     red, blue, green, yellow
     
 
-## List Comprehension
+# List Comprehension
 기존 List를 사용해서 간단한 다른 List를 만드는 기법
 * List comprehension
 * Nested for loop
@@ -87,7 +86,7 @@ print(result2)
     [0, 2, 4, 6, 8]
     
 
-### Nested for loop
+## Nested for loop
 
 
 ```python
@@ -122,11 +121,11 @@ stuff
 
 
 
-## Enumerate & Zip
+# Enumerate & Zip
 * Zip
 * Enumerate
 
-### Enumerate
+## Enumerate
 List의 element를 추출할 때 번호를 붙여서 추출
 
 
@@ -165,7 +164,7 @@ list(enumerate(mylist))
 
 
 
-### Zip
+## Zip
 두 개의 List의 값을 병렬적으로 추출
 
 
@@ -204,12 +203,12 @@ print("a : {}, \nb : {}, \nc : {}".format(a,b,c))
 
 
 
-## Lambda & MapReduce
+# Lambda & MapReduce
 * Lambda
 * Map Function
 * Reduce Function
 
-### Lambda
+## Lambda
 함수 이름 없이, 함수처럼 사용할 수 있는 익명함수  
 <code>lambda arg1, arg2, ... : expression </pre>
 
@@ -242,7 +241,7 @@ print((lambda x : x**2)(5))
     25
     
 
-### Map function
+## Map function
 Sequence 자료형(list, tuple, ...) 각 element에 동일한 function을 적용
 <pre><code> map(function, list1, list2, ...) </pre></code> map object로 반환하기 때문에 반환값에 list()를 사용
 
@@ -274,7 +273,7 @@ print(list(map(lambda x : x ** 2 if x % 2 ==0 else x, ex)))
     [1, 4, 3, 16, 5]
     
 
-### Reduce function
+## Reduce function
 map function과 달리 list에 똑같은 함수를 적용해서 통합
 
 
@@ -286,12 +285,12 @@ print(reduce(lambda x, y : x + y, [1,2,3,4,5]))
     15
     
 
-## Asterisk
+# Asterisk
 * Asterisk  
 \* 를 의미  
 단순 곱셈, 제곱연산, 가변 인자 활용 등 다양하게 사용
 
-### \* args
+## \* args
 몇개의 인자가 들어올지 모를 때 사용
 
 
@@ -307,7 +306,7 @@ asterisk_test(1,2,3,4,5,6)
     <class 'tuple'>
     
 
-### \*\*kargs
+## \*\*kargs
 키워드 인자를 넣어줄 때 사용(dict type으로 적용)
 
 
@@ -323,7 +322,7 @@ asterisk_test2(1, b=2, c=3, d=4, e=5, f=6)
     <class 'dict'>
     
 
-## Data Structure
+# Data Structure
 * Collections
 * Data Structure
 * deque
@@ -332,7 +331,7 @@ asterisk_test2(1, b=2, c=3, d=4, e=5, f=6)
 * defaultdict
 * namedtuple
 
-### Collections
+## Collections
 List, Tuple, Dict에 대한 Python Built-in 확장 자료 구조(모듈)  
 편의성, 실행 효율 등을 사용자에게 제공  
 아래의 모듈이 존재
@@ -342,7 +341,7 @@ List, Tuple, Dict에 대한 Python Built-in 확장 자료 구조(모듈)
 * from collections import defaultdict
 * from collections import namedtuple
 
-### deque
+## deque
 Stack과 Queue를 지원하는 모듈
 List에 비해 효율적인 자료 저장 방식을 지원  
 효율적 메모리 구조로 처리 속도 향상
@@ -406,7 +405,7 @@ print(deque(reversed(deque_list)))
     deque([7, 6, 5, 2, 1, 0, 10, 4, 3, 5, 6, 7])
     
 
-### orderedDict
+## orderedDict
 Dict와 달리 데이터를 입력한 순서대로 dict를 반환
 
 
@@ -427,7 +426,7 @@ for k, v in d2.items() :
     l 500
     
 
-### defaultdict
+## defaultdict
 Dict type의 값에 기본 값을 지정, 신규값 생성 시 사용하는 방법
 
 
@@ -460,7 +459,7 @@ print(d["first"])
     0
     
 
-### Counter
+## Counter
 Sequence type의 data elements의 갯수를 dict 형태로 반환
 
 
@@ -474,7 +473,7 @@ print(c)
     Counter({'a': 3, 'l': 2, 'g': 1, 'h': 1, 'd': 1})
     
 
-### namedtuple
+## namedtuple
 Tuple 형태로 Data 구조체를 저장하는 방법  
 저장되는 data의 variable을 사전에 지정해서 저장
 
