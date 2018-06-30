@@ -210,7 +210,7 @@ print("a : {}, \nb : {}, \nc : {}".format(a,b,c))
 
 ## Lambda
 함수 이름 없이, 함수처럼 사용할 수 있는 익명함수  
-<code>lambda arg1, arg2, ... : expression </pre>
+<code>lambda arg1, arg2, ... : expression </code>
 
 
 ```python
