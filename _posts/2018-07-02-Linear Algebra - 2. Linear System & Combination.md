@@ -126,6 +126,7 @@ print(np.linalg.solve(A, b))
 * \\(A \in \mathbb{R}^{m \times n} \\), \\(m > n \\) : variables이 equations보다 적은 경우, 일반적으로 해가 없음(over-determined system)
 * 가장 근사적으로 만족시키는 해를 구하는 것은 가능(e.g. regularization, least squares)
 
+
 # 선형 결합
 
 ## 선형 결합(Linear Combination)

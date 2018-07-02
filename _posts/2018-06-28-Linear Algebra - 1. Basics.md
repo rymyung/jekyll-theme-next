@@ -8,6 +8,8 @@ tags:
 - Python
 ---
 
+# Scalar, Vector, and Matrix
+
 ```python
 import numpy as np
 ```
