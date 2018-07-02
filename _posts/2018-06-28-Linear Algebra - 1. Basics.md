@@ -1,5 +1,5 @@
 ---
-title: Linear Algebra - Chapter 1. Basics
+title: Linear Algebra - 1. Basics
 date: 2018-06-28 23:29:53
 categories:
 - Linear Algebra
@@ -7,15 +7,13 @@ tags:
 - Linear Algebra
 - Python
 ---
-
-# Chapter 1. Basic for Linear Algebra
-
+이 포스트는 *인공지능을 위한 선형대수* 강의를 요약한 것입니다. [Link](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
 
 ```python
 import numpy as np
 ```
 
-## 1.1. Scalar
+# Scalar
 
 **Scalar** : a single number, e.g., \\(3.8 \\)
 
@@ -28,7 +26,7 @@ print("Example of scalar : ", scalar)
     Example of scalar :  3.8
     
 
-## 1.2. Vector
+# Vector
 **Vector** : an ordered list of numbers, e.g., $$x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n$$
 
 
@@ -73,7 +71,7 @@ print("Dimension of column vector :", column_vector.T.shape)
     Dimension of column vector : (1, 3)
     
 
-## 1.3. Matrix
+# Matrix
 **Matrix** : a two-dimensional array of numbers
 
 * \\(A \in \mathbb{R}^{n\times n} \\) : Square matrix (# of rows = # of columns)  
@@ -155,7 +153,7 @@ print(rec_matrix[:,1])
     [6 4 2]
     
 
-## 1.4. Vector/Matrix Additions and Multiplications
+# Vector/Matrix Additions and Multiplications
 
 * \\(C = A + B \\) : Element-wise addition, i.e., \\(C_{i,j} = A_{i,j} + B_{i,j} \\)
     * A, B should have the same size , i.e., \\(A, B \in \mathbb{R}^{mxn} \\)  
@@ -203,7 +201,7 @@ print(np.matmul(A,B)) # A.dot(B)
      [ 9 -3]]
     
 
-## 1.5. Properties
+# Properties
 
 * \\(AB \ne BA \\) : ***not*** Commutative(교환법칙 성립 x)
     * e.g., Given \\(A \in \mathbb{R}^{2\times3} \\) and \\(B \in \mathbb{R}^{3\times5} \\), \\(AB \\) is defined, but \\(BA \\) is not even defined
