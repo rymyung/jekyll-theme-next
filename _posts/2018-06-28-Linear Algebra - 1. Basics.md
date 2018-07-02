@@ -14,7 +14,7 @@ tags:
 import numpy as np
 ```
 
-# Scalar
+## Scalar
 
 **Scalar** : a single number, e.g., \\(3.8 \\)
 
@@ -27,7 +27,7 @@ print("Example of scalar : ", scalar)
     Example of scalar :  3.8
     
 
-# Vector
+## Vector
 **Vector** : an ordered list of numbers, e.g., $$x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix} \in \mathbb{R}^n$$
 
 
@@ -72,7 +72,7 @@ print("Dimension of column vector :", column_vector.T.shape)
     Dimension of column vector : (1, 3)
     
 
-# Matrix
+## Matrix
 **Matrix** : a two-dimensional array of numbers
 
 * \\(A \in \mathbb{R}^{n\times n} \\) : Square matrix (# of rows = # of columns)  
