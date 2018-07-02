@@ -1,5 +1,5 @@
 ---
-title: Linear Algebra - Chapter 2. Basics
+title: Linear Algebra - Chapter 2. Linear System & Combination
 date: 2018-07-02 15:41:53
 categories:
 - Linear Algebra
