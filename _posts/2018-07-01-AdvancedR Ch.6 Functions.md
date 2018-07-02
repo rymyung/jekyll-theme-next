@@ -23,13 +23,11 @@ library(pryr)
 
 ```R
 f <- function(x) x^2
-f
+print(f)
 ```
 
-
-<pre class=language-r><code>function (x) 
-x^2</code></pre>
-
+    function(x) x^2
+    
 
 
 ```R
@@ -59,3 +57,43 @@ environment(f)
 
     <environment: R_GlobalEnv>
 
+
+## 원시 함수
+함수가 세 가지 요소를 가진다는 규칙에는 한 가지 예외가 있다. <code>sum()</code>과 같은 원시 함수(primitive functions)는 <code>.Primitive()</code>로 직접 C코드를 호출하는데, 이와 같은 함수에는 R 코드가 없다. 따라서 함수의 formals(), body(), 그리고 environment()가 모두 <code>NULL</code>이다.
+
+
+```R
+print(sum)
+
+
+    function (..., na.rm = FALSE)  .Primitive("sum")
+    
+
+
+`
+formals(sum)
+
+
+
+    NULL
+
+
+
+
+body(sum)
+
+
+
+    NULL
+
+
+
+
+environment(sum)
+
+
+
+    NULL
+```
+
+원시 함수는 **base**패키지에서만 찾을 수 있으며, 이 함수는 저수준에서 동작하기 때문에 보다 효율적이고, 인자매칭에 대해 다른 규칙을 가질 수 있다.
