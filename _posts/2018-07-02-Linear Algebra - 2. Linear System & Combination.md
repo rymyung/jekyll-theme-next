@@ -8,14 +8,12 @@ tags:
 - Python
 ---
 
-이 포스트는 *인공지능을 위한 선형대수* 강의를 요약한 것입니다. [Link](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
 
+# 선형 방정식 및 선형 시스템
 
 ```python
 import numpy as np
 ```
-
-# 선형 방정식 및 선형 시스템
 
 ## 선형 방정식(Linear Equation)
 * \\(x_1, x_2, \cdots, x_n \\)을 변수로 가진 선형방정식은 다음과 같은 형태로 나타냄 $$ a_1x_1 + a_2x_2 + \cdots + a_nx_n = b$$
@@ -200,3 +198,6 @@ $$\text{If } v_3 \in Span\{v_1, v_2\} \rightarrow Span\{v_1, v_2\} = Span\{v_1, 
 즉, 이 방정식은 최소한 하나의 해(\\(x = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_p \end{bmatrix} = \begin{bmatrix} 0 \\ 0 \\ \vdots \\ 0 \end{bmatrix} \\), trivial solution)를 가지고 있다.  
 * 이 trivial solution이 유일한 해이면, \\(v_1, v_2, \cdots, v_p \\)는 선형 독립,  
 * 이 trivial solution이 유일한 해가 아니면, \\(v_1, v_2, \cdots, v_p \\)는 선형 종속이다.
+
+
+이 포스트는 *인공지능을 위한 선형대수* 강의를 요약한 것임. [Link](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)

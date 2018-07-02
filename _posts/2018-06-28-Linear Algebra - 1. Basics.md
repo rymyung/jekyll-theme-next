@@ -7,7 +7,6 @@ tags:
 - Linear Algebra
 - Python
 ---
-이 포스트는 *인공지능을 위한 선형대수* 강의를 요약한 것입니다. [Link](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
 
 ```python
 import numpy as np
@@ -240,3 +239,4 @@ print(B.dot(A)) # Error
 
     ValueError: shapes (2,2) and (3,2) not aligned: 2 (dim 1) != 3 (dim 0)
 
+이 포스트는 *인공지능을 위한 선형대수* 강의를 요약한 것임. [Link](https://www.edwith.org/linearalgebra4ai/joinLectures/14072)
