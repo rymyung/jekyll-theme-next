@@ -3,7 +3,6 @@ title: K-Nearest Neighbor
 date: 2018-06-29 23:12:00
 categories:
 - Algorithm
-- Classification
 tags:
 - knn
 - R
