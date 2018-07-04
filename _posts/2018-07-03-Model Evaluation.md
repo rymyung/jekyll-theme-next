@@ -7,6 +7,7 @@ tags:
 - General
 - R
 ---
+
 머신러닝을 통해 모델을 학습시킬 경우, 모델이 어느정도의 성능을 내느냐를 측정하는 것은 매우 중요하다. 또한, 모델은 이전에 본 적이 없는 데이터에도 일반화(Generalization)이 잘 되어 있어야 한다. 이번 포스트에서는 학습시킨 모델에 대한 성능 평가와 유효성 검증에 대해 알아보자.
 * 모델의 성능 : 해결해야할 문제의 종류 - 분류(Classification) / 회귀(Regression) - 에 따른 평가 지표 선택
 * 모델의 일반화(Generalization) : Bias-Variance / Overfitting 문제
@@ -30,22 +31,71 @@ tags:
     * K-Means
     * Association Rules
     * ETC  
+    
 등이 있다.
 
 # 모델 성능 평가
 모델 성능 평가는 모델의 성능을 검증하는 것이다. 이를 위해서는 모델의 목표와 사용된 모델링 기법 모두에 적절한 성능 평가 지표를 선택해야 한다.
 
 ## 회귀 모델 평가 지표
-회귀 모델은 수치를 예측하는 모델으로, 실제 값과 예측 값과의 비교를 통해 모델의 성능을 평가한다.
+회귀 모델은 수치를 예측하는 모델으로, 잔차(residuals)라고하는 실제 값과 예측 값의 차이를 가지고 모델의 성능을 평가한다.
+
+
+```R
+# Load library
+library(ggplot2) 
+
+# Load data
+data(mtcars)
+
+# Train simple linear model
+lm.fit <- lm(mpg ~ wt, data = mtcars)
+
+# Predict
+mtcars$pred <- predict(lm.fit, newdata = mtcars)
+
+# Plot residuals
+ggplot(mtcars, aes(wt, mpg)) + geom_point() +
+  geom_line(aes(wt, pred), color = 'blue') +
+  geom_segment(aes(wt, pred, yend = mpg, xend = wt)) +
+  scale_y_continuous('')
+```
+
+![잔차 그래프](https://www.dropbox.com/s/ftnbyq7qs4y6ou9/residuals.png?raw=1)
 
 ### RMSE(Root Mean Square Error)
+RMSE는 가장 일반적인 회귀 모델 평가 지표로, 실제 값과 예측 값의 차이를 제곱하고 평균을 구한 후 다시 제곱근을 적용해서 구한다.
+$$\mathbf{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \hat{x_i})^2}$$
+RMSE 외에도 MAE(Mean Absolute Error), MAPE(Mean Absolute Percentage Error) 등이 있다.
 
 ### 결정계수(\\(R^2 \\))
+결정 계수는 회귀 모델의 설명력은 표현하는 지표로, 모델에 의해 설명되는 y 분산의 비율로 간주된다. 0에 가까울수록 설명력이 낮고, 1에 가까울수록 설명력이 높다.
+$$ \mathbf{R^2} = \frac{\mathbf{SSR}}{\mathbf{SST}} = 1 - \frac{\mathbf{SSE}}{\mathbf{SST}}$$로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression]()을 참고.
 
-### MAE(Mean Absolute Error)
+
+```R
+# R Squared
+print(paste("R Squared : ", summary(lm.fit)$r.squared))
+
+# Adjusted R Squared
+print(paste("Adjusted R Squared : ", summary(lm.fit)$adj.r.squared))
+```
+
+    [1] "R Squared :  0.752832793658264"
+    [1] "Adjusted R Squared :  0.744593886780207"
+    
 
 ## 분류 모델 평가 지표
-분류 모델은 2개 또는 그 이상의 범주를 예측하는 모델이다. 분류 모델의 성능을 측정하기 위해 사용하는 유용한 도구로 혼동 행렬(Confusion Matrix)가 있다.
+분류 모델은 2개 또는 그 이상의 범주를 예측하는 모델이다.  
+분류 모델의 평가 지표로는 
+* 정확도(Accuracy)
+* 정밀도(Precision)
+* 재현율(Recall)
+* F1 Score
+* 민감도와 특이도  
+
+등으로, 평가 지표의 선택은 해결해야 하는 문제에 따라 결정해야 한다.  
+분류 모델의 성능을 측정하기 위해 사용하는 유용한 도구로 혼동 행렬(Confusion Matrix)를 사용한다.
 
 ### 혼동 행렬(Confusion Matrix)
 혼동 행렬은 실제 알려진 데이터 범주에 대해 분류 모델의 예측을 정리한 표로, 각각의 예측 유형별로 실제 데이터가 얼마나 발생했는지 확인할 수 있다. 
@@ -55,7 +105,7 @@ tags:
 **P**(Actual) |True Positive(**TP**) |False Negative(**FN**)   
 **N**(Actual) |False Positive(**FP**)|True Negative(**TN**)   
 
-혼동 행렬에서 True / False는 예측이 맞았는지/틀렸는지를 나타내고, Positive / Negative는 예측한 값이 1인지 / 0인지를 나타낸다.  
+혼동 행렬에서 True / False는 예측이 맞았는지/틀렸는지를 나타내고, Positive / Negative는 예측한 값이 양성(=1)인지 / 음성(=0)인지를 나타낸다.  
 즉, 
 * TP : 1이라고 예측하고 실제 값이 1인 경우
 * FP : 1이라고 예측하고 실제 값이 0인 경우
@@ -129,26 +179,117 @@ print(confusionMatrix(data = test.pred, reference = test$target, mode = "everyth
 ### 정확도(Accuracy)
 정확도는 분류 모델의 성능을 측정하는데 사용하는 가장 일반적인 지표로, 정확히 분류된 항목의 숫자를 전체 항목의 숫자로 나눠서 구한다.  
 $$\mathbf{Accuracy} = \frac{(\mathbf{TP} + \mathbf{TN})}{(\mathbf{TP} + \mathbf{TN} + \mathbf{FP} + \mathbf{FN})}$$
+위의 예제에서 정확도를 계산해보면,
+$$\frac{(7114 + 1118)}{(7114 + 1234 + 302 + 1118)} = 0.8428$$로, 약 84%의 정확도를 가지고 있다.
 
 #### 클래스 불균형(Unbalanced Class) 문졔
-암 진단과 같은 1과 0의 숫자가 매우 크게 차이가 나는 경우를 클래스 불균형 문제라고 한다. 이러한 문제에서는 대부분의 경우(99% 이상)이 0이기 때문에 정확도를 평가 지표로 하는 것은 좋은 방법이 아니다. 자세한 것은 [클래스 불균형]()에서 참고.
+암 진단과 같은 1과 0의 숫자가 매우 크게 차이가 나는 경우를 클래스 불균형 문제라고 한다. 이러한 문제에서는 대부분의 경우(99% 이상)이 0이기 때문에 정확도를 평가 지표로 하는 것은 좋은 방법이 아니다. [클래스 불균형]() 참고.
 
 ### 정밀도(Precision)
+정밀도는 양성(=1)으로 예측한 것이 얼마나 정확한지를 판별하는 지표로, 확인을 위한 측정 도구이다.
+$$\mathbf{Precision} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FP})}$$
+위의 예제에서 정밀도를 계산해보면,
+$$\frac{7114}{(7114 + 1234)} = 0.8522$$로, 약 85%의 정밀도를 가지고 있다. 즉, 연수입이 \$ 50K 이하(= 양성)라고 예측된 사람들 중 약 15%는 연 수입이 \$ 50K 이상으로 잘못 예측되었다.  
 
-### 재현율(Recall)
+
+### 재현율(Recall) / 민감도(Sensitivity) / 참양성률(True Positive Rate)
+재현율은 실제 양성(=1)인 것들 중에서 양성이라고 예측한 비율을 나타내는 지표로, 유용성에 대한 측정 도구이다.
+$$\mathbf{Recall} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FN})}$$
+위의 예제에서 정밀도를 계산해보면,
+$$\frac{7114}{(7114 + 302)} = 0.9593$$으로, 약 96%의 재현율을 가지고 있다. 즉, 실제 연수입이 \$ 50K 이하인 사람들 중 약 4%만이 $ 50K 이상으로 잘못 예측되었다.
 
 ### F1 Score
+F1 Score는 정밀도와 재현율의 조합으로 된 지표이다.
+$$ \mathbf{F1} = \frac{\mathbf{Precision} \times \mathbf{Recall}}{(\mathbf{Precision} + \mathbf{Recall})}$$
+위의 예제에서 F1 Score를 계산해보면,
+$$\frac{0.8522 \times 0.9593}{(0.8522 + 0.9593)} = 0.9026$$이다.
 
-### 민감도(Sensitivity)
+### 특이도(Specificity) / 참음성률(True Negative Rate)
+특이도는 실제 음성(=0)인 것들 중에서 음성이라고 예측한 비율을 나타내는 지표이다.
+$$\mathbf{Specificity} = \frac{\mathbf{TN}}{(\mathbf{TN} + \mathbf{FP})}$$
+위의 예제에서 특이도를 계산해보면,
+$$\frac{1118}{(1118 + 1234)} = 0.4753$$으로, 약 47%이다.
 
-### 특이도(Specificity)
+민감도와 특이도는 어느 범주를 양성(=1)로 두느냐에 따라 서로 바뀌게 된다. 또한 null 분류 모델(모든 값을 양성 또는 음성으로 예측하는 모델)에서 민감도 또는 특이도 둘 중 하나는 항상 0이 된다. 그래서 유용하지 않은 분류 모델에서는 이 두 가지 중 적어도 하나의 값은 항상 낮은 값을 갖게 된다.
 
-# 모델 유효성 검증
-모델 유효성 검증은 모델이 train 데이터에서 잘 동작할 뿐만 아니라 새로운 데이터에 대해서도 잘 작동되어야 한다. 즉, 일반화(Generalization)이 잘 되어있어야 좋은 모델이 될 수 있다.
+측정 도구     | 수식                            | 예시 
+--------------|---------------------------------|---------
+정확도        | (TP + TN) / (TP + FP + TN + FN) | 0.8428
+정밀도        | TP / (TP + FP)                  | 0.8522
+재현율        | TP / (TP + FN)                  | 0.9593
+특이도        | TN / (TN + FP)                  | 0.4753
 
-## Bias-Variance
+# 모델 검증
+모델은 훈련 데이터에서 잘 동작할 뿐만 아니라 새로운 데이터에 대해서도 잘 작동되어야 한다. 즉, 일반화(Generalization)이 잘 되어있어야 좋은 모델이 될 수 있다. 훈련 데이터에서는 잘 동작하지만 새로운 데이터에 대해서는 잘 동작하지 않는 경우, 모델은 훈련 데이터에 과적합(Overfitting)되어있다고 한다.
 
 ## Overfitting
+
+### 편향(Bias) - 분산(Variance) Trade-off
+머신러닝에서 모델의 에러는 두 가지로 분류할 수 있다. 바로 편향(Bias)와 분산(Variance)이다. 편향이 올라가면 분산이 내려가고, 편향이 내려가면 분산이 올라가는데 이를 편향 - 분산 trade-off라 한다.
+
+![Bias-Variance Trade-off](https://www.dropbox.com/s/2vsx5lq6uv6si68/bias-variance.jpg?raw=1)
+
+* 편향 
+    * 실제 문제를 단순한 모델로 근사시킴으로 인해 발생되는 오차
+    * 일반적으로 유연성이 높을수록 편향은 적음
+* 분산 
+    * 훈련 데이터가 아닌 다른 데이터를 사용하여 예측하는 경우, 예측 값이 변동되는 정도
+    * 훈련 데이터는 모델을 학습시키는데 사용되므로, 다른 데이터를 사용하면 예측 값이 변동됨
+    * 그러나 분산이 높으면 데이터의 변화가 작아도 예측 값이 크게 변할 수 있음
+    
+
+![Overfitting](https://www.dropbox.com/s/g59jln9m3s0gpu9/overfitting.jpg?raw=1)
+Bias가 높고(Inaccurate) Variance가 낮은(Robust)한 모델은 Underfitting되어 있다. Underfitting의 경우, 훈련 데이터를 사용해 예측한 값과 다른 데이터를 사용해 예측한 값의 차이는 적지만, 실제 값과의 차이는 크다.
+Bias가 낮고(Flexible) Variance가 높은(Susceptible)한 모델은 Overfitting 되어 있다. Overfitting의 경우, 훈련 데이터를 사용해 예측한 값은 실제 값과 차이가 적으나, 다른 데이터를 사용해 예측한 값은 실제 값과 차이가 크다.
+
+
+```R
+# Generate data for best model
+true <- poly(1:100, 3) %*% c(-2, 1, 2)
+
+# Input noise
+y <- true + rnorm(100, sd = 0.2)
+temp <- data.frame(x = 1:100, actual = y)
+
+# Input true model
+temp$true <- true
+
+# Make best model
+best <- lm(y ~ poly(x, 3), data = temp)
+temp$best <- predict(best, temp)
+
+# Make underfit model
+underfit <- lm(y ~ x, data = temp)
+temp$underfit.pred <- predict(underfit, temp)
+
+# Make overfit model
+overfit <- lm(y ~ poly(x, 25), data = temp)
+temp$overfit.pred <- predict(overfit, temp)
+
+# Plot overfitting & underfitting
+ggplot(temp, aes(x, actual)) + geom_point(shape = 1, col = "azure4") + 
+geom_line(aes(x, true), lwd = 1, color = "black") +
+geom_line(aes(x, best), lwd = 1, color = "steelblue") +
+geom_line(aes(x, underfit.pred), lwd = 1, color = "palegreen3") +
+geom_line(aes(x, overfit.pred), lwd = 1, color = "darkorange") +
+theme_minimal() + 
+theme(legend.position = "none") + labs(x = "", y = "")
+
+plot(temp$x, temp$actual, col = "gray", lwd = 2)
+lines(temp$x, temp$true, lwd = 3, col = "black")
+lines(temp$x, temp$underfit.pred, lwd = 3, col = "palegreen3")
+lines(temp$x, temp$overfit.pred, lwd = 3, col = "darkorange")
+lines(temp$x, temp$best, lwd = 3, col = "steelblue")
+legend(x = "topright", legend = c("True Function", "Underfit Model (df = 1)", "Overfit Model (df = 25)", 
+    "Best Model (df = 3)"), lwd = rep(3, 3), col = c("black", "palegreen3", 
+    "darkorange", "steelblue"), text.width = 32, cex = 0.85)
+```
+![Overfitting Example](https://www.dropbox.com/s/1rtedaconzcplu9/overfitting_plot.png?raw=1)
+
+
+
+![Overfitting Example](https://www.dropbox.com/s/igg7afzg5xczoxa/overfitting_plot2.png?raw=1)
+
 
 ## Cross Validation
 
