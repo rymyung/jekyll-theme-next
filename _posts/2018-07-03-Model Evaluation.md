@@ -1,4 +1,11 @@
-
+---
+title: 모델 성능 평가
+date: 2018-07-03 17:33:00
+categories:
+- Algorithm
+tags:
+- R
+---
 머신러닝을 통해 모델을 학습시킬 경우, 모델이 어느정도의 성능을 내느냐를 측정하는 것은 매우 중요하다. 또한, 모델은 이전에 본 적이 없는 데이터에도 일반화(Generalization)이 잘 되어 있어야 한다. 이번 포스트에서는 학습시킨 모델에 대한 성능 평가와 유효성 검증에 대해 알아보자.
 * 모델의 성능 : 해결해야할 문제의 종류 - 분류(Classification) / 회귀(Regression) - 에 따른 평가 지표 선택
 * 모델의 일반화(Generalization) : Bias-Variance / Overfitting 문제
