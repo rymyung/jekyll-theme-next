@@ -1,5 +1,5 @@
 ---
-title: 모델 성능 평가
+title: 모델 성능 평가(Model Evaluation)
 date: 2018-07-03 17:33:00
 categories:
 - Algorithm
@@ -62,8 +62,8 @@ ggplot(mtcars, aes(wt, mpg)) + geom_point() +
 ![잔차 그래프](https://www.dropbox.com/s/ftnbyq7qs4y6ou9/residuals.png?raw=1)
 
 ### RMSE(Root Mean Square Error)
-RMSE는 가장 일반적인 회귀 모델 평가 지표로, 실제 값과 예측 값의 차이를 제곱하고 평균을 구한 후 다시 제곱근을 적용해서 구한다.
-$$\mathbf{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \hat{x_i})^2}$$
+RMSE는 가장 일반적인 회귀 모델 평가 지표로, 실제 값과 예측 값의 차이를 제곱하고 평균을 구한 후 다시 제곱근을 적용해서 구한다.  
+<center>$$\mathbf{RMSE} = \sqrt{\frac{1}{n}\sum_{i=1}^n (x_i - \hat{x_i})^2}$$</center>  
 RMSE 외에도 MAE(Mean Absolute Error), MAPE(Mean Absolute Percentage Error) 등이 있다.
 
 ### 결정계수(\\(R^2 \\))
@@ -176,7 +176,7 @@ print(confusionMatrix(data = test.pred, reference = test$target, mode = "everyth
 
 ### 정확도(Accuracy)
 정확도는 분류 모델의 성능을 측정하는데 사용하는 가장 일반적인 지표로, 정확히 분류된 항목의 숫자를 전체 항목의 숫자로 나눠서 구한다.  
-$$$\mathbf{Accuracy} = \frac{(\mathbf{TP} + \mathbf{TN})}{(\mathbf{TP} + \mathbf{TN} + \mathbf{FP} + \mathbf{FN})}$$$
+$$\mathbf{Accuracy} = \frac{(\mathbf{TP} + \mathbf{TN})}{(\mathbf{TP} + \mathbf{TN} + \mathbf{FP} + \mathbf{FN})}$$
 위의 예제에서 정확도를 계산해보면,
 $$\frac{(7114 + 1118)}{(7114 + 1234 + 302 + 1118)} = 0.8428$$로, 약 84%의 정확도를 가지고 있다. 즉, 전체 사람들 중 약 16%는 잘못 예측되었다.
 
