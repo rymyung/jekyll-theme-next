@@ -67,8 +67,9 @@ RMSE는 가장 일반적인 회귀 모델 평가 지표로, 실제 값과 예측
 RMSE 외에도 MAE(Mean Absolute Error), MAPE(Mean Absolute Percentage Error) 등이 있다.
 
 ### 결정계수(\\(R^2 \\))
-결정 계수는 회귀 모델의 설명력은 표현하는 지표로, 모델에 의해 설명되는 y 분산의 비율로 간주된다. 0에 가까울수록 설명력이 낮고, 1에 가까울수록 설명력이 높다.
-$$ \mathbf{R^2} = \frac{\mathbf{SSR}}{\mathbf{SST}} = 1 - \frac{\mathbf{SSE}}{\mathbf{SST}}$$로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression]()을 참고.
+결정 계수는 회귀 모델의 설명력은 표현하는 지표로, 모델에 의해 설명되는 y 분산의 비율로 간주된다. 0에 가까울수록 설명력이 낮고, 1에 가까울수록 설명력이 높다.  
+<center>$$ \mathbf{R^2} = \frac{\mathbf{SSR}}{\mathbf{SST}} = 1 - \frac{\mathbf{SSE}}{\mathbf{SST}}$$</center>  
+    로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression]()을 참고.
 
 
 ```R
@@ -176,37 +177,42 @@ print(confusionMatrix(data = test.pred, reference = test$target, mode = "everyth
 
 ### 정확도(Accuracy)
 정확도는 분류 모델의 성능을 측정하는데 사용하는 가장 일반적인 지표로, 정확히 분류된 항목의 숫자를 전체 항목의 숫자로 나눠서 구한다.  
-$$\mathbf{Accuracy} = \frac{(\mathbf{TP} + \mathbf{TN})}{(\mathbf{TP} + \mathbf{TN} + \mathbf{FP} + \mathbf{FN})}$$
-위의 예제에서 정확도를 계산해보면,
-$$\frac{(7114 + 1118)}{(7114 + 1234 + 302 + 1118)} = 0.8428$$로, 약 84%의 정확도를 가지고 있다. 즉, 전체 사람들 중 약 16%는 잘못 예측되었다.
+<center>$$\mathbf{Accuracy} = \frac{(\mathbf{TP} + \mathbf{TN})}{(\mathbf{TP} + \mathbf{TN} + \mathbf{FP} + \mathbf{FN})}$$</center>  
+위의 예제에서 정확도를 계산해보면,  
+<center>$$\frac{(7114 + 1118)}{(7114 + 1234 + 302 + 1118)} = 0.8428$$</center>  
+로, 약 84%의 정확도를 가지고 있다. 즉, 전체 사람들 중 약 16%는 잘못 예측되었다.
 
 #### 클래스 불균형(Unbalanced Class) 문졔
 암 진단과 같은 1과 0의 숫자가 매우 크게 차이가 나는 경우를 클래스 불균형 문제라고 한다. 이러한 문제에서는 대부분의 경우(99% 이상)이 0이기 때문에 정확도를 평가 지표로 하는 것은 좋은 방법이 아니다. [클래스 불균형]() 참고.
 
 ### 정밀도(Precision)
-정밀도는 양성(=1)으로 예측한 것이 얼마나 정확한지를 판별하는 지표로, 확인을 위한 측정 도구이다.
-$$\mathbf{Precision} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FP})}$$
-위의 예제에서 정밀도를 계산해보면,
-$$\frac{7114}{(7114 + 1234)} = 0.8522$$로, 약 85%의 정밀도를 가지고 있다. 즉, 연수입이 \$ 50K 이하(= 양성)라고 예측된 사람들 중 약 15%는 연 수입이 \$ 50K 이상으로 잘못 예측되었다.  
+정밀도는 양성(=1)으로 예측한 것이 얼마나 정확한지를 판별하는 지표로, 확인을 위한 측정 도구이다.  
+<center>$$\mathbf{Precision} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FP})}$$</center>  
+위의 예제에서 정밀도를 계산해보면,  
+<center>$$\frac{7114}{(7114 + 1234)} = 0.8522$$</center>  
+로, 약 85%의 정밀도를 가지고 있다. 즉, 연수입이 \$ 50K 이하(= 양성)라고 예측된 사람들 중 약 15%는 연 수입이 \$ 50K 이상으로 잘못 예측되었다.  
 
 
 ### 재현율(Recall) / 민감도(Sensitivity) / 참양성률(True Positive Rate)
-재현율은 실제 양성(=1)인 것들 중에서 양성이라고 예측한 비율을 나타내는 지표로, 유용성에 대한 측정 도구이다.
-$$\mathbf{Recall} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FN})}$$
-위의 예제에서 정밀도를 계산해보면,
-$$\frac{7114}{(7114 + 302)} = 0.9593$$으로, 약 96%의 재현율을 가지고 있다. 즉, 실제 연수입이 \$ 50K 이하인 사람들 중 약 4%만이 $ 50K 이상으로 잘못 예측되었다.
+재현율은 실제 양성(=1)인 것들 중에서 양성이라고 예측한 비율을 나타내는 지표로, 유용성에 대한 측정 도구이다.  
+<center>$$\mathbf{Recall} = \frac{\mathbf{TP}}{(\mathbf{TP} + \mathbf{FN})}$$</center>  
+위의 예제에서 정밀도를 계산해보면,  
+<center>$$\frac{7114}{(7114 + 302)} = 0.9593$$</center>  
+으로, 약 96%의 재현율을 가지고 있다. 즉, 실제 연수입이 \$ 50K 이하인 사람들 중 약 4%만이 $ 50K 이상으로 잘못 예측되었다.
 
 ### F1 Score
-F1 Score는 정밀도와 재현율의 조합으로 된 지표이다.
-$$ \mathbf{F1} = \frac{\mathbf{Precision} \times \mathbf{Recall}}{(\mathbf{Precision} + \mathbf{Recall})}$$
-위의 예제에서 F1 Score를 계산해보면,
-$$\frac{0.8522 \times 0.9593}{(0.8522 + 0.9593)} = 0.9026$$이다.
+F1 Score는 정밀도와 재현율의 조합으로 된 지표이다.  
+<center>$$ \mathbf{F1} = \frac{\mathbf{Precision} \times \mathbf{Recall}}{(\mathbf{Precision} + \mathbf{Recall})}$$</center>  
+위의 예제에서 F1 Score를 계산해보면,  
+<center>$$\frac{0.8522 \times 0.9593}{(0.8522 + 0.9593)} = 0.9026$$</center>  
+이다.
 
 ### 특이도(Specificity) / 참음성률(True Negative Rate)
-특이도는 실제 음성(=0)인 것들 중에서 음성이라고 예측한 비율을 나타내는 지표이다.
-$$\mathbf{Specificity} = \frac{\mathbf{TN}}{(\mathbf{TN} + \mathbf{FP})}$$
-위의 예제에서 특이도를 계산해보면,
-$$\frac{1118}{(1118 + 1234)} = 0.4753$$으로, 약 47%이다.
+특이도는 실제 음성(=0)인 것들 중에서 음성이라고 예측한 비율을 나타내는 지표이다.  
+<center>$$\mathbf{Specificity} = \frac{\mathbf{TN}}{(\mathbf{TN} + \mathbf{FP})}$$</center>  
+위의 예제에서 특이도를 계산해보면,  
+<center>$$\frac{1118}{(1118 + 1234)} = 0.4753$$</center>  
+으로, 약 47%이다.
 
 민감도와 특이도는 어느 범주를 양성(=1)로 두느냐에 따라 서로 바뀌게 된다. 또한 null 분류 모델(모든 값을 양성 또는 음성으로 예측하는 모델)에서 민감도 또는 특이도 둘 중 하나는 항상 0이 된다. 그래서 유용하지 않은 분류 모델에서는 이 두 가지 중 적어도 하나의 값은 항상 낮은 값을 갖게 된다.
 
@@ -218,9 +224,9 @@ $$\frac{1118}{(1118 + 1234)} = 0.4753$$으로, 약 47%이다.
 특이도        | TN / (TN + FP)                  | 0.4753
 
 ### 수신기 작동 특성(Receiver Operating Characteristic, ROC Curve)
-대부분의 분류 모델은 \\(\hat{y_i} = 0, 1 \\)을 직접 산출하지 않고, [0, 1]구간 사이의 값을 가진 확률값 \\(\hat{u_i} \\)을 계산하고, 이 확률이 특정 threshold/cutoff를 넘었을 때 1로 최종 예측하게 된다.
-$$\hat{y_i} = 1, \text{if } \hat{u_i} > \text{threshold}$$
-$$\hat{y_i} = 0, \text{if } \hat{u_i} \leq \text{threshold}$$
+대부분의 분류 모델은 \\(\hat{y_i} = 0, 1 \\)을 직접 산출하지 않고, [0, 1]구간 사이의 값을 가진 확률값 \\(\hat{u_i} \\)을 계산하고, 이 확률이 특정 threshold/cutoff를 넘었을 때 1로 최종 예측하게 된다.  
+<center>$$\hat{y_i} = 1, \text{if } \hat{u_i} > \text{threshold}$$</center>  
+<center>$$\hat{y_i} = 0, \text{if } \hat{u_i} \leq \text{threshold}$$</center>  
 ROC 곡선은 이렇게 threshold를 변화하면서 True Positive Rate과 False Positive Rate을 그린 곡선이다. threshold가 1이면 모든 관측치를 Negative로 예측해서 TPR = FPR = 0이 된다. 반대로 threshold가 0이면 모든 관측치를 Positive로 예측해서 TPR = FPR = 1이 된다. ROC 곡선은 주어진 FPR에 대해 TPR이 높을수록 더 정확한 것이므로 ROC 곡선이 위에 있는 모델이 성능이 좋다. ROC 곡선 아래 영역(Area Under ROC, AUC)은 모델의 정확도를 하나의 숫자로 요약해주는 지표로, ROC 곡선 아래에 있는 영역의 면적이다. 0과 1 사이의 값을 가지며, 1에 가까울수록 성능이 좋음을 나타낸다.
 
 
@@ -247,8 +253,8 @@ plot(perf)
 ### 편향(Bias) - 분산(Variance) Trade-off
 머신러닝에서 모델의 에러는 두 가지로 분류할 수 있다. 바로 편향(Bias)와 분산(Variance)이다. 편향이 올라가면 분산이 내려가고, 편향이 내려가면 분산이 올라가는데 이를 편향 - 분산 trade-off라 한다.
 
-![Bias-Variance Trade-off](https://www.dropbox.com/s/4smjjxketgwdzez/bias-variance-tradeoff.jpg?raw=1)
-[이미지 출처](https://tex.stackexchange.com/questions/307117/reconstructing-the-following-bias-variance-diagram)
+![Bias-Variance Trade-off](https://www.dropbox.com/s/4smjjxketgwdzez/bias-variance-tradeoff.jpg?raw=1)  
+[이미지 출처](https://tex.stackexchange.com/questions/307117/reconstructing-the-following-bias-variance-diagram)  
 
 * 편향 
     * 실제 문제를 단순한 모델로 근사시킴으로 인해 발생되는 오차
@@ -261,7 +267,7 @@ plot(perf)
     
     
 
-![Overfitting](https://www.dropbox.com/s/g59jln9m3s0gpu9/overfitting_eg.jpg?raw=1)
+![Overfitting](https://www.dropbox.com/s/g59jln9m3s0gpu9/overfitting_eg.jpg?raw=1)  
 [이미지 출처](https://dadosreais.wordpress.com/2016/12/20/causal-inference-in-practice-with-observational-data-machine-learning-heterogeneity-metric-ks-x2-tests-optimize-function-metric-cache-h2o-ai/)  
 Bias가 높고(Inaccurate) Variance가 낮은(Robust)한 모델은 Underfitting되어 있다. Underfitting의 경우, 훈련 데이터를 사용해 예측한 값과 다른 데이터를 사용해 예측한 값의 차이는 적지만, 실제 값과의 차이는 크다.
 Bias가 낮고(Flexible) Variance가 높은(Susceptible)한 모델은 Overfitting 되어 있다. Overfitting의 경우, 훈련 데이터를 사용해 예측한 값은 실제 값과 차이가 적으나, 다른 데이터를 사용해 예측한 값은 실제 값과 차이가 크다.
@@ -312,8 +318,8 @@ legend(x = "topright", legend = c("True Function", "Underfit Model (df = 1)", "O
 
 
 ### K-fold Cross Validation
-![cross validation](https://www.dropbox.com/s/8pqumzcqda0q4ke/cv.jpg?raw=1)
-[이미지 출처](https://www.researchgate.net/figure/The-K-fold-cross-validation-scheme-133-Each-of-the-K-partitions-is-used-as-a-test_fig10_323969239)
+![cross validation](https://www.dropbox.com/s/8pqumzcqda0q4ke/cv.jpg?raw=1)  
+[이미지 출처](https://www.researchgate.net/figure/The-K-fold-cross-validation-scheme-133-Each-of-the-K-partitions-is-used-as-a-test_fig10_323969239)  
 전체 데이터를 크기가 같은 k개의 fold로 분할한다. 그리고 첫 번째 fold를 테스트 데이터, 나머지 k-1개 fold를 훈련 데이터로 구성하여 모델을 만들고 성능을 평가한다. 그 후 테스트 데이터가 되는 fold를 바꿔가면서 k번 반복 후, 성능의 평균값을 최종 성능으로 간주한다.
 
 
