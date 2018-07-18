@@ -297,17 +297,21 @@ overfit <- lm(y ~ poly(x, 25), data = temp)
 temp$overfit.pred <- predict(overfit, temp)
 
 # Plot overfitting & underfitting
-plot(temp$x, temp$actual, col = "gray", lwd = 2, xlab = "", ylab = "")
-lines(temp$x, temp$true, lwd = 3, col = "black")
-lines(temp$x, temp$underfit.pred, lwd = 3, col = "palegreen3")
-lines(temp$x, temp$overfit.pred, lwd = 3, col = "darkorange")
-lines(temp$x, temp$best, lwd = 3, col = "steelblue")
-legend(x = "topright", legend = c("True Function", "Underfit Model (df = 1)", "Overfit Model (df = 25)", 
-    "Best Model (df = 3)"), lwd = rep(3, 3), col = c("black", "palegreen3", 
-    "darkorange", "steelblue"), text.width = 32, cex = 0.85)
+ggplot(temp) + geom_point(aes(x, actual), col = 'gray') +
+geom_line(aes(x, true, col = 'True Function'), size = 1) +
+geom_line(aes(x, best, col = 'Best Model (df = 3)'), size = 1) + 
+geom_line(aes(x, underfit.pred, col = 'Underfit Model (df = 1)'), size = 1) + 
+geom_line(aes(x, overfit.pred, col = 'Overfit Model (df = 25)'), size = 1) +
+xlab("") + ylab("") + theme_minimal() + 
+scale_colour_manual(name = '', 
+                    values =c('True Function'='black',
+                              'Best Model (df = 3)'='steelblue', 
+                              'Underfit Model (df = 1)'='palegreen3', 
+                              'Overfit Model (df = 25)'='darkorange')) +
+theme(legend.position = "top")
 ```
 
-![overfitting example](https://www.dropbox.com/s/igg7afzg5xczoxa/overfitting_plot2.png?raw=1)
+![overfitting example](https://www.dropbox.com/s/1rtedaconzcplu9/overfitting_plot.png?raw=1)
 위의 예시에서, 25차 다항식 모델(Overfitting)은 훈련 데이터에서는 높은 성능을 보이지만, 테스트 데이터에서는 아주 낮은 성능을 보일 것이다. 즉, 훈련 데이터와 테스트 데이터의 성능에 큰 차이가 있다. 이는 일반화 능력이 매우 낮다고 할 수 있다. 반면 1차 다항식 모델(Underfitting)은 훈련 데이터나 테스트 데이터 모두에서 낮은 성능을 보일 것이다. 3차 다항식 모델(Best)은 훈련 데이터에 대한 성능은 25차 다항식 모델보다 낮겠지만, 테스트 데이터에서는 높을 것이다. 결국, 3차 다항식 모델은 훈련 데이터와 테스트 데이터의 성능 차이가 작아 일반화 능력이 뛰어나다고 할 수 있다.
 
 ## 교차 검증(Cross Validation)
