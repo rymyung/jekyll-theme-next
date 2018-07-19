@@ -69,7 +69,7 @@ RMSE 외에도 MAE(Mean Absolute Error), MAPE(Mean Absolute Percentage Error) �
 ### 결정계수(\\(R^2 \\))
 결정 계수는 회귀 모델의 설명력은 표현하는 지표로, 모델에 의해 설명되는 y 분산의 비율로 간주된다. 0에 가까울수록 설명력이 낮고, 1에 가까울수록 설명력이 높다.  
 <center>$$ \mathbf{R^2} = \frac{\mathbf{SSR}}{\mathbf{SST}} = 1 - \frac{\mathbf{SSE}}{\mathbf{SST}}$$</center>  
-로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression]()을 참고.
+로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression](https://rymyung.github.io/algorithm/regression/2018/07/12/Linear-Regression/)을 참고.
 
 
 ```R
