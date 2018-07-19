@@ -382,7 +382,7 @@ print(solve(t(x_mat) %*% x_mat) %*% (t(x_mat) %*% y_mat))
 <center>$$W := W - \alpha \frac{1}{m}\sum_{i=1}^m (Wx_i - y_i)x_i$$</center>
 
 ![경사하강법](https://www.dropbox.com/s/koln95uz33729c3/gradient%20descent.jpg?raw=1)
-<center>[이미지 출처](http://gdyoon.tistory.com/9)</center>  
+[이미지 출처](http://gdyoon.tistory.com/9)  
 비용 함수의 W에서의 기울기(\\( \frac{\partial}{\partial W}cost(W) \\))가 음수(빨간 선)이면 \\( W \\)는 학습률(learning rate)배 만큼 증가하고 양수이면 학습률 배 만큼 감소하면서 비용 함수가 최소가 되는 지점을 찾는다. 다음 예시를 보자.
 
 
