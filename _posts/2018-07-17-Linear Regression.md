@@ -1,6 +1,6 @@
 ---
 title: 선형 회귀 분석(Linear Regression)
-date: 2018-07-12 18:02:00
+date: 2018-07-19 19:06:00
 categories:
 - Algorithm
 - Regression
