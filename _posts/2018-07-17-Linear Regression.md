@@ -13,7 +13,7 @@ tags:
 <center>$$ y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \cdots +  \beta_n \cdot x_n + \varepsilon$$</center>
 <center> 또는 </center>
 <center>$$H(X) = W^TX$$</center>
-선형 회귀는 회귀계수 \\( \beta_n, W \\)을 추정하는 선형 관계를 가정한 모수적 방법으로, 선형회귀의 목적은 크게 2가지가 있다.
+선형 회귀는 회귀계수 $$\beta_n, W$$을 추정하는 선형 관계를 가정한 모수적 방법으로, 선형회귀의 목적은 크게 2가지가 있다.
 * Predictive Model : 여러 변수들을 가지고 하나의 변수에 대해 예측하려고 할 때(예측력이 중요)
 * Explanatory Model : 둘 혹은 여럿 간의 관계를 설명하거나 이해하고자 할 때(종속 변수와 독립 변수 사이의 인과관계가 중요)
 
@@ -382,7 +382,7 @@ print(solve(t(x_mat) %*% x_mat) %*% (t(x_mat) %*% y_mat))
 <center>$$W := W - \alpha \frac{1}{m}\sum_{i=1}^m (Wx_i - y_i)x_i$$</center>
 
 ![경사하강법](https://www.dropbox.com/s/koln95uz33729c3/gradient%20descent.jpg?raw=1)
-[이미지 출처](http://gdyoon.tistory.com/9)  
+[<center>이미지 출처</center>](http://gdyoon.tistory.com/9)  
 비용 함수의 W에서의 기울기(\\( \frac{\partial}{\partial W}cost(W) \\))가 음수(빨간 선)이면 \\( W \\)는 학습률(learning rate)배 만큼 증가하고 양수이면 학습률 배 만큼 감소하면서 비용 함수가 최소가 되는 지점을 찾는다. 다음 예시를 보자.
 
 
