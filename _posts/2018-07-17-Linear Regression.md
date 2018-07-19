@@ -119,7 +119,7 @@ lm.pred <- predict(lm.fit, newdata = test)
 * \\( \varepsilon_i \\)들은 서로 독립적이다.
 
 ![선형회귀도해](https://www.dropbox.com/s/yxan4ive93j4yyn/error%20term.jpg?raw=1)
-<center>[이미지 출처](http://reliawiki.org/index.php/Simple_Linear_Regression_Analysis)</center>
+[<center>이미지 출처</center>](http://reliawiki.org/index.php/Simple_Linear_Regression_Analysis)
 
 오차항 \\( \varepsilon_i \\)가 확률변수이므로, \\( y_i \\)도 확률변수가 된다. 또한 \\( E(\varepsilon_i) = 0 \\)이므로
 <center>$$E(y_i) = E(\beta_0 + \beta_1x_1 + \cdots + \beta_nx_n + \varepsilon_i) = \beta_0 + \beta_1x_1 + \cdots + \beta_nx_n$$</center>가 된다. 위 식을 모든 x와 y에 대하여 나타내면,
@@ -238,11 +238,11 @@ crPlots(lm.fit)
 ```
 
 
-![Linear Regression 5](https://www.dropbox.com/s/lwqcomptu1qsds7/Linear_Regressoin_5.png?raw=5)
+![Linear Regression 5](https://www.dropbox.com/s/lwqcomptu1qsds7/Linear_Regressoin_5.png?raw=1)
 
 
 
-![Linear Regression 6](https://www.dropbox.com/s/a421ohj9vul572q/Linear_Regressoin_6.png?raw=6)
+![Linear Regression 6](https://www.dropbox.com/s/a421ohj9vul572q/Linear_Regressoin_6.png?raw=1)
 
 
 위의 plot들에서 비선형성이 관찰된다면 변수 변환을 하거나 비선형 회귀 모형을 사용해야 한다.
@@ -295,8 +295,13 @@ print(vif(lm.fit))
 
 ## 경사하강법(Gradient Descent)
 
-회귀 계수 \\( \beta \\)를 구하기 위해 회귀 함수의 표현식을 바꿔보면, \\( y = H(X) = X^TW = w_1x_1 + w_2x_2 + \cdots + w_nx_n + b \\)로 표현할 수 있다.  
-이 때, W는 회귀 계수 벡터(가중치 벡터) \\( W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \\ b \end{bmatrix} \\)이고, X는 입력 데이터 행렬 \\( X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ 1 \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1k} \\ x_{21} & x_{22} & \cdots & x_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk} \\ 1 & 1 & \cdots & 1\end{bmatrix} \\)이다.  
+회귀 계수 \\( \beta \\)를 구하기 위해 회귀 함수의 표현식을 바꿔보면,  
+\\( y = H(X) = X^TW = w_1x_1 + w_2x_2 + \cdots + w_nx_n + b \\)로 표현할 수 있다.  
+이 때, W는 회귀 계수 벡터(가중치 벡터) 
+$$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \\ b \end{bmatrix}$$이고,  
+X는 입력 데이터 행렬
+$$X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ 1 \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1k} \\ x_{21} & x_{22} & \cdots & x_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk} \\ 1 & 1 & \cdots & 1\end{bmatrix}$$
+이다.  
 이 회귀 함수 \\( H(X) \\)에 대해, 잔차제곱합을 비용 함수(cost function) 혹은 손실 함수(loss function)라고 부른다. 
 <center>$$cost(W) = \frac{1}{m}\sum_{i=1}^m (H(x_i) - y_i)^2$$</center>
 
@@ -332,7 +337,7 @@ geom_segment(aes(x, lm.fit$coefficients[2]*x + lm.fit$coefficients[1], yend = y,
 
 
 
-![Linear Regression 8](https://www.dropbox.com/s/dxczm281l3hofiq/Linear_Regressoin_8.png?raw=8)
+![Linear Regression 8](https://www.dropbox.com/s/dxczm281l3hofiq/Linear_Regressoin_8.png?raw=1)
 
 
 위의 예시에서, x와 y는 선형 관계로 표현될 수 있고 실제 \\( W = \begin{bmatrix} 12 \\ -7 \end{bmatrix} \\)이다. 그렇다면 정규방정식을 적용해 x의 회귀 계수 \\( \hat{W} \\)를 구해보자.
@@ -443,7 +448,7 @@ theme(legend.position = "top")
 
 
 
-![Linear Regression 9](https://www.dropbox.com/s/ez2d9yqz43vzgq0/Linear_Regressoin_9.png?dl=0)
+![Linear Regression 9](https://www.dropbox.com/s/ez2d9yqz43vzgq0/Linear_Regressoin_9.png?raw=1)
 
 
 # 회귀 모형의 유의성 검정
@@ -528,11 +533,6 @@ summary(lm.fit)
 <center>$$\text{Adj }R^2 = 1 - (1 - R^2)\frac{k-1}{k-n-1}$$</center>
 
 <code>lm()</code>함수를 통해서 만든 회귀 모형의 결정 계수는 <code>summary()</code>함수로 확인할 수 있다.
-
-
-```R
-cat("결정계수 :", summary(lm.fit)$r.squared, "\n", "조정 결정계수 :", summary(lm.fit)$adj.r.squared)
-```
 
     결정계수 : 0.7511206 
      조정 결정계수 : 0.7416046
