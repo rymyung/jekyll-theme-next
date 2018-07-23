@@ -290,7 +290,7 @@ print(vif(lm.fit))
 
 # 회귀 계수 추정
 최소제곱법(Ordinary Least Squares, OLS)은 가장 기본적인 회귀 계수를 추정하는 방법으로 실제 관측값(\\( y_i \\))과 예측값(\\( \hat{y_i} \\))과의 차이를 최소로 하는 회귀 계수(\\( \beta \\), \\( W \\))를 추정하는 방법이다. 잔차에는 \\( \pm \\)부호가 있으므로 각 잔차를 제곱하여 더한 합을 최소로 하는 회귀 계수를 추정한다.
-<center>$$ \text{잔차제곱합(Residual Sum of Squares, RSS) : } \sum_{i=1} e_i^2 = \sum_{i=1} (y_i - \beta_ix_i)^2$$</center>
+<center>$$\text{잔차제곱합(Residual Sum of Squares, RSS) : } \sum_{i=1}^n e_i^2 = \sum_{i=1}^n (y_i - \beta_0 - \sum_{j=1}^k \beta_jx_{ij})^2$$</center>
 최소제곱법 이외에 일반화 최소제곱법, 최우추정법, 도구변수 추정법 등 회귀 계수를 추정하는 여러 방법이 있다. 어떤 방법을 쓰는 것이 좋은가는 결국 모집단에 대해 어떤 가정을 할 수 있는가에 달려있다.
 
 ## 경사하강법(Gradient Descent)
