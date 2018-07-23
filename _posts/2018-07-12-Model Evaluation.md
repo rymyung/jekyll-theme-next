@@ -360,7 +360,7 @@ pred.dt$result <- ifelse(pred.dt$predict == pred.dt$actual, 1, 0)
 
 # Get model performance by fold
 print(pred.dt %>% group_by(fold) %>% summarize(performance = sum(result)/n()))
-
+```
 
     # A tibble: 5 x 2
        fold performance
@@ -370,7 +370,6 @@ print(pred.dt %>% group_by(fold) %>% summarize(performance = sum(result)/n()))
     3     3       0.842
     4     4       0.845
     5     5       0.835
-    
 
 
 
