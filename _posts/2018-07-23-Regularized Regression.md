@@ -30,12 +30,12 @@ Lasso는 Ridge와 비슷한 형태이지만 기존의 잔차제곱합에 $$l_1 \
 <center>$$\sum_{i=1}^n (y_i - \beta_0 - \sum_{j=1}^k \beta_jx_{ij})^2 + \lambda \sum_{j=1}^k \lvert \beta_j \rvert = RSS +  \lambda \sum_{j=1}^k \lvert \beta_j \rvert, \text{ } \lambda \ge 0$$</center>
 
 ![Lasso](https://www.dropbox.com/s/geu4tyejo8hkj71/Lasso.jpg?raw=1)
-Lasso 또한 Ridge와 마찬가지로 제한 영역 내에서 가능한 한 작은 RSS를 갖는 $\hat{\beta}$를 추정한다. 그러나 Lasso는 $l_1 \text{ } norm$을 사용하기 때문에 마름모 형태의 제한 영역을 가지고 있어서 Lasso의 회귀 계수 추정치는 0이 될 수 있다. 이 점이 Ridge와 Lasso의 큰 차이점이다. Ridge는 몇몇 변수의 회귀 계수를 0에 가깝게 추정할 수는 있지만 0이 되진 않으므로 모든 변수들을 회귀 직선을 만드는데 사용한다. 그에 반해 Lasso는 몇몇 변수의 회귀 계수를 정확하게 0으로 추정할 수 있으므로(변수 선택의 효과) 중요하지 않은 변수들을 제거하여 해석력에 있어서 Ridge보다 더욱 강력한 장점을 가진다.
+Lasso 또한 Ridge와 마찬가지로 제한 영역 내에서 가능한 한 작은 RSS를 갖는 $$\hat{\beta}$$를 추정한다. 그러나 Lasso는 $$l_1 \text{ } norm$$을 사용하기 때문에 마름모 형태의 제한 영역을 가지고 있어서 Lasso의 회귀 계수 추정치는 0이 될 수 있다. 이 점이 Ridge와 Lasso의 큰 차이점이다. Ridge는 몇몇 변수의 회귀 계수를 0에 가깝게 추정할 수는 있지만 0이 되진 않으므로 모든 변수들을 회귀 직선을 만드는데 사용한다. 그에 반해 Lasso는 몇몇 변수의 회귀 계수를 정확하게 0으로 추정할 수 있으므로(변수 선택의 효과) 중요하지 않은 변수들을 제거하여 해석력에 있어서 Ridge보다 더욱 강력한 장점을 가진다.
 
-## Hyper Parameter $\lambda$
+## Hyper Parameter $$\lambda$$
 Ridge와 Lasso는 모두 두 가지 다른 기준을 절충한다.
 * 최소제곱법에서와 같이 RSS를 작게 만들어 데이터에 잘 적합하는 회귀 계수 추정치를 찾음
-* 수축 페널티라 불리는 두번째 항($$ \lambda \sum\beta_j^2,\text{  } \lambda \sum \left\vert\beta_j\right\vert$$)은 $$\beta_0, \cdots, \beta_k$$가 0에 가까울 때 작고, 따라서 $$\beta_j$$의 추정치를 0으로 수축하는 효과가 있음  
+* 수축 페널티라 불리는 두번째 항($$\lambda \sum\beta_j^2,\text{  } \lambda \sum \left\vert\beta_j\right\vert$$)은 $$\beta_0, \cdots, \beta_k$$가 0에 가까울 때 작고, 따라서 $$\beta_j$$의 추정치를 0으로 수축하는 효과가 있음  
 
 Hyper Parameter $$\lambda$$는 회귀 계수 추정치에 대한 이 두 항의 상대적인 영향을 제어한다(회귀 계수의 크기를 제어)  
     $$\lambda \rightarrow 0$$, 수축 페널티의 영향이 없어 최소 제곱 추정치와 같아짐  
