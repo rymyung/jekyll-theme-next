@@ -230,7 +230,7 @@ durbinWatsonTest(lm.fit)
 
 
 ## 선형성
-선형 회귀에서는 오차항들이 서로 독립이어야한다. <code>car</code> 패키지의 <code>crPlots()</code> 함수를 사용해 선형성을 확인할 수 있다.
+<code>car</code> 패키지의 <code>crPlots()</code> 함수를 사용해 선형성을 확인할 수 있다.
 
 
 ```R
