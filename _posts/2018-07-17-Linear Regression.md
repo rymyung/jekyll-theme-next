@@ -10,7 +10,7 @@ tags:
 - R
 ---
 선형 회귀란 종속 변수와 한 개 이상의 독립(설명) 변수와의 선형 상관 관계를 모델링하는 기법이다.
-<center>$$ y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \cdots +  \beta_n \cdot x_n + \varepsilon$$</center>
+<center>$$ y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \cdots +  \beta_k \cdot x_k + \varepsilon$$</center>
 <center> 또는 </center>
 <center>$$H(X) = W^TX$$</center>
 선형 회귀는 회귀계수 $$\beta_n, W$$을 추정하는 선형 관계를 가정한 모수적 방법으로, 선형회귀의 목적은 크게 2가지가 있다.
@@ -129,11 +129,11 @@ lm.pred <- predict(lm.fit, newdata = test)
 실제값(\\( y_i \\))과 예측값(\\( \hat{y_i} \\))의 차이를 잔차라고 한다.
 <center>$$e_i = y_i - \hat{y_i}$$</center>
 잔차 \\( e_i \\)와 오차항 \\( \varepsilon_i \\)가 어떻게 다른가를 구별하는 것은 중요한데, 모형을 다시 한 번 정리해보면 다음과 같다.
-<center>$$y_i = \beta_0 + \beta_1x_1 + \cdots + \beta_nx_n + \varepsilon_i$$</center>
-<center>$$y_i = \hat{\beta_0} + \hat{\beta_1}x_1 + \cdots + \hat{\beta_n}x_n + e_i$$</center>
+<center>$$y_i = \beta_0 + \beta_1x_1 + \cdots + \beta_kx_k + \varepsilon_i$$</center>
+<center>$$y_i = \hat{\beta_0} + \hat{\beta_1}x_1 + \cdots + \hat{\beta_k}x_k + e_i$$</center>
 즉,
-<center>$$\varepsilon_i = y_i - (\beta_0 + \beta_1x_1 + \cdots + \beta_nx_n)$$</center>
-<center>$$e_i = y_i - (\hat{\beta_0} + \hat{\beta_1}x_1 + \cdots + \hat{\beta_n}x_n)$$</center>이다.
+<center>$$\varepsilon_i = y_i - (\beta_0 + \beta_1x_1 + \cdots + \beta_kx_k)$$</center>
+<center>$$e_i = y_i - (\hat{\beta_0} + \hat{\beta_1}x_1 + \cdots + \hat{\beta_k}x_k)$$</center>이다.
 위에서 알 수 있듯이 오차항 \\( \varepsilon_i \\)는 실제값 \\(y_i \\)와 **모집단** 회귀식과의 차이를 말하고, 잔차 \\( e_i \\)는 실제값 \\(y_i \\)와 **추정** 회귀식과의 편차를 말한다.  
 오차항 \\( \varepsilon_i \\)는 실제로 알 수 없기 때문에 잔차 \\( e_i \\)에 의해 추정된다.
 
@@ -296,11 +296,11 @@ print(vif(lm.fit))
 ## 경사하강법(Gradient Descent)
 
 회귀 계수 \\( \beta \\)를 구하기 위해 회귀 함수의 표현식을 바꿔보면,  
-\\( y = H(X) = X^TW = w_1x_1 + w_2x_2 + \cdots + w_nx_n + b \\)로 표현할 수 있다.  
+\\( y = H(X) = X^TW = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b \\)로 표현할 수 있다.  
 이 때, W는 회귀 계수 벡터(가중치 벡터) 
-$$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_n \\ b \end{bmatrix}$$이고,  
+$$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_k \\ b \end{bmatrix}$$이고,  
 X는 입력 데이터 행렬
-$$X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \\ 1 \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1k} \\ x_{21} & x_{22} & \cdots & x_{2k} \\ \vdots & \vdots & \ddots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk} \\ 1 & 1 & \cdots & 1\end{bmatrix}$$
+$$X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \\ 1 \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1n} \\ x_{21} & x_{22} & \cdots & x_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ x_{k1} & x_{k2} & \cdots & x_{kn} \\ 1 & 1 & \cdots & 1\end{bmatrix}$$
 이다.  
 이 회귀 함수 \\( H(X) \\)에 대해, 잔차제곱합을 비용 함수(cost function) 혹은 손실 함수(loss function)라고 부른다. 
 <center>$$cost(W) = \frac{1}{m}\sum_{i=1}^m (H(x_i) - y_i)^2$$</center>
@@ -471,13 +471,13 @@ theme(legend.position = "top")
 
   |자유도|제곱합|제곱평균|F-통계량|P-value
 --|------|------|--------|--------|--------
-Regression|n|**SSR**|회귀제곱평균(MSR) : SSR/n | F비 : MSR/MSE | F-통계량의 유의확률(F분포표)
-Residual|k-n-1|**SSE**|잔차제곱평균(MSE) : SSE/(k-n-1) |  | 
-Total|k-1|**SST**|총제곱평균(MST) : SST/(k-1) |  | 
+Regression|k|**SSR**|회귀제곱평균(MSR) : SSR/k | F비 : MSR/MSE | F-통계량의 유의확률(F분포표)
+Residual|n-k-1|**SSE**|잔차제곱평균(MSE) : SSE/(n-k-1) |  | 
+Total|n-1|**SST**|총제곱평균(MST) : SST/(n-1) |  | 
   
 
 
-<center>$$F = \frac{MSR}{MSE} = \frac{(SST-SSE)/n}{SSE/(k-n-1)}, \text{ } n : 변수의 수, \text{ } k : 데이터의 수$$</center>
+<center>$$F = \frac{MSR}{MSE} = \frac{(SST-SSE)/k}{SSE/(n-k-1)}, \text{ } k : 변수의 수, \text{ } n : 데이터의 수$$</center>
 
 <code>lm()</code>함수를 통해서 만든 회귀 모형의 검정 결과는 <code>summary()</code>함수로 확인할 수 있다.
 
@@ -530,7 +530,7 @@ summary(lm.fit)
 ### 조정결정계수 \\( \text{Adj } R^2 \\)
 결정계수는 설명 변수의 수가 증가할 수록 그 값이 증가하게 된다. 그러나 무작정 설명 변수의 수를 늘려서 결정계수를 크게 하는 것은 항상 바람직한 것은 아니다. 왜냐하면 설명 변수의 수가 증가할 수록 모형의 복잡도가 높아질 뿐만 아니라, 설명 변수 간의 상관관계가 높아지게 되어 다중공선성의 문제가 발생하게 되고, 회귀 계수의 해석에 어려움이 따르게 되기 때문이다.  
 따라서 설명 변수의 수를 고려해서 결정계수를 조정해야 한다.
-<center>$$\text{Adj }R^2 = 1 - (1 - R^2)\frac{k-1}{k-n-1}$$</center>
+<center>$$\text{Adj }R^2 = 1 - (1 - R^2)\frac{n-1}{n-k-1}$$</center>
 
 <code>lm()</code>함수를 통해서 만든 회귀 모형의 결정 계수는 <code>summary()</code>함수로 확인할 수 있다.
 
