@@ -50,6 +50,10 @@ library(glmnet)
 library(ggplot2)
 library(dplyr)
 
+# Set plot setting
+options(repr.plot.width=7, repr.plot.height=3)
+par(mfrow = c(1,2))
+
 # Load data
 data(Hitters)
 
@@ -68,16 +72,16 @@ train.id <- sample(1:nrow(Hitters), 0.7*nrow(Hitters))
 grid <- 10^seq(10, -2, length=100)
 
 # Search best lambda for ridge
-ridge.fit <- cv.glmnet(x[train.id,], y[train.id], alpha = 0, lambda = grid)
-options(repr.plot.width=7, repr.plot.height=3)
-par(mfrow = c(1,2))
-plot(ridge.fit, sub = "Ridge")
+ridge.fit <- cv.glmnet(x[train.id,], y[train.id], alpha = 0, lambda = grid, nfolds = 10)
 ridge.lambda <- ridge.fit$lambda.min
 
 # Search best lambda for lasso
-lasso.fit <- cv.glmnet(x[train.id,], y[train.id], alpha = 1, lambda = grid)
-plot(lasso.fit, sub = "Lasso")
+lasso.fit <- cv.glmnet(x[train.id,], y[train.id], alpha = 1, lambda = grid, nfolds = 10)
 lasso.lambda <- lasso.fit$lambda.min
+
+# Plot lambda search
+plot(ridge.fit, sub = "Ridge")
+plot(lasso.fit, sub = "Lasso")
 ```
 
 
@@ -102,7 +106,7 @@ print(lasso.lambda)
 lm.fit <- lm(Salary ~ ., data = Hitters, subset = train.id)
 
 # Predict
-lm.pred <- predict(lm.fit, newdata = Hitters[-train.id,])
+lm.pred    <- predict(lm.fit, newdata = Hitters[-train.id,])
 ridge.pred <- predict(ridge.fit, s = ridge.lambda, newx = x[-train.id,])
 lasso.pred <- predict(lasso.fit, s = lasso.lambda, newx = x[-train.id,])
 
@@ -174,3 +178,49 @@ lasso의 경우 몇몇 변수들의 회귀 계수가 0이 된 것을 확인할 �
 # Elastic Net
 Elastic net은 $$L_1 \text{ } norm$과 $L_2 \text{ } norm$$을 혼합하여 사용하는 방법이다.
 <center>$$\sum_{i=1}^n (y_i - \beta_0 - \sum_{j=1}^k \beta_jx_{ij})^2 + \lambda(\alpha\cdot\sum_{j=1}^k \beta_j^2 + (1-\alpha)\cdot\sum_{j=1}^n \lvert\beta_j\rvert) $$</center>
+
+
+```R
+result <- data.frame()
+for (alpha in seq(0, 1, 0.05)) {
+    elastic.fit <- cv.glmnet(x[train.id,], y[train.id], alpha = alpha, lambda = grid)
+    predict <- predict(elastic.fit, s = elastic.fit$lambda.min, newx = x[-train.id,])
+    
+    result <- result %>% bind_rows(data.frame(alpha = alpha, 
+                                              rmse = sqrt(mean((predict - y[-train.id])^2)),
+                                              lambda = elastic.fit$lambda.min))
+}
+
+ggplot(result, aes(alpha, rmse)) + geom_point() + geom_line() + theme_minimal()
+print(result)
+```
+
+
+
+       alpha     rmse    lambda
+    1   0.00 303.2178 10.722672
+    2   0.05 304.1674  8.111308
+    3   0.10 310.6207  2.656088
+    4   0.15 306.8686  4.641589
+    5   0.20 301.2367  8.111308
+    6   0.25 307.6747  3.511192
+    7   0.30 302.2205  6.135907
+    8   0.35 308.7533  2.656088
+    9   0.40 306.1014  3.511192
+    10  0.45 305.4991  3.511192
+    11  0.50 293.6007 43.287613
+    12  0.55 304.3893  3.511192
+    13  0.60 306.4340  2.656088
+    14  0.65 308.2538  2.009233
+    15  0.70 302.6103  3.511192
+    16  0.75 302.0282  3.511192
+    17  0.80 307.0551  2.009233
+    18  0.85 300.7267  3.511192
+    19  0.90 303.4592  2.656088
+    20  0.95 305.9950  2.009233
+    21  1.00 302.7538  2.656088
+    
+
+
+![regularized 4](https://www.dropbox.com/s/octu0z4aqk0nvyp/regularized_4.png?raw=1)
+
