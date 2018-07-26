@@ -295,14 +295,9 @@ print(vif(lm.fit))
 
 ## 경사하강법(Gradient Descent)
 
-회귀 계수 \\( \beta \\)를 구하기 위해 회귀 함수의 표현식을 바꿔보면,  
-\\( y = H(X) = X^TW = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b \\)로 표현할 수 있다.  
-이 때, W는 회귀 계수 벡터(가중치 벡터) 
-$$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_k \\ b \end{bmatrix}$$이고,  
-X는 입력 데이터 행렬
-$$X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_k \\ 1 \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1n} \\ x_{21} & x_{22} & \cdots & x_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ x_{k1} & x_{k2} & \cdots & x_{kn} \\ 1 & 1 & \cdots & 1\end{bmatrix}$$
-이다.  
-이 회귀 함수 \\( H(X) \\)에 대해, 잔차제곱합을 비용 함수(cost function) 혹은 손실 함수(loss function)라고 부른다. 
+회귀 계수 $$\beta$$를 구하기 위해 회귀 함수의 표현식을 바꿔보면, $$y = H(X) = XW = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b$$로 표현할 수 있다.  
+이 때, W는 회귀 계수 벡터(가중치 벡터) $$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_k \\ b \end{bmatrix}$$이고, X는 입력 데이터 행렬 $$X = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots \\ x_n^T \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1k} & 1 \\ x_{21} & x_{22} & \cdots & x_{2k} & 1 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk} & 1\end{bmatrix}$$이다.  
+이 회귀 함수 $$H(X)$$에 대해, 잔차제곱합을 비용 함수(cost function) 혹은 손실 함수(loss function)라고 부른다. 
 <center>$$cost(W) = \frac{1}{m}\sum_{i=1}^m (H(x_i) - y_i)^2$$</center>
 
 ### 정규방정식(Normal Equation)
