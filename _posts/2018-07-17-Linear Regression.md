@@ -12,8 +12,8 @@ tags:
 선형 회귀란 종속 변수와 한 개 이상의 독립(설명) 변수와의 선형 상관 관계를 모델링하는 기법이다.
 <center>$$ y = \beta_0 + \beta_1 \cdot x_1 + \beta_2 \cdot x_2 + \cdots +  \beta_k \cdot x_k + \varepsilon$$</center>
 <center> 또는 </center>
-<center>$$H(X) = W^TX$$</center>
-선형 회귀는 회귀계수 $$\beta_n, W$$을 추정하는 선형 관계를 가정한 모수적 방법으로, 선형회귀의 목적은 크게 2가지가 있다.
+<center>$$H(X) = W^TX + b$$</center>
+선형 회귀는 회귀계수 $$\beta_n, W, b$$을 추정하는 선형 관계를 가정한 모수적 방법으로, 선형회귀의 목적은 크게 2가지가 있다.
 * Predictive Model : 여러 변수들을 가지고 하나의 변수에 대해 예측하려고 할 때(예측력이 중요)
 * Explanatory Model : 둘 혹은 여럿 간의 관계를 설명하거나 이해하고자 할 때(종속 변수와 독립 변수 사이의 인과관계가 중요)
 
@@ -295,10 +295,11 @@ print(vif(lm.fit))
 
 ## 경사하강법(Gradient Descent)
 
-회귀 계수 $$\beta$$를 구하기 위해 회귀 함수의 표현식을 바꿔보면, $$y = H(X) = XW = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b$$로 표현할 수 있다.  
-이 때, W는 회귀 계수 벡터(가중치 벡터) $$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_k \\ b \end{bmatrix}$$이고, X는 입력 데이터 행렬 $$X = \begin{bmatrix} x_1^T \\ x_2^T \\ \vdots \\ x_n^T \end{bmatrix} = \begin{bmatrix} x_{11} & x_{12} & \cdots & x_{1k} & 1 \\ x_{21} & x_{22} & \cdots & x_{2k} & 1 \\ \vdots & \vdots & \ddots & \vdots & \vdots \\ x_{n1} & x_{n2} & \cdots & x_{nk} & 1\end{bmatrix}$$이다.  
+회귀 계수 $$\beta$$를 구하기 위해 회귀 함수의 표현식을 바꿔보면, $$y = H(X) = W^TX + b = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b$$로 표현할 수 있다.  
+이 때, W는 회귀 계수 벡터(가중치 벡터) $$W = \begin{bmatrix} w_1 \\ w_2 \\ \vdots \\ w_k \end{bmatrix}$$이고,  
+X는 입력 데이터 행렬 $$X = \begin{bmatrix} x_1 & x_2 & \cdots & x_n\end{bmatrix} = \begin{bmatrix} x_{11} & x_{21} & \cdots & x_{n1} \\ x_{12} & x_{22} & \cdots & x_{n2} \\ \vdots & \vdots & \ddots & \vdots \\ x_{1k} & x_{2k} & \cdots & x_{nk} \end{bmatrix}$$이다.  
 이 회귀 함수 $$H(X)$$에 대해, 잔차제곱합을 비용 함수(cost function) 혹은 손실 함수(loss function)라고 부른다. 
-<center>$$cost(W) = \frac{1}{m}\sum_{i=1}^m (H(x_i) - y_i)^2$$</center>
+<center>$$cost(W, b) = \frac{1}{m}\sum_{i=1}^m (H(x_i) - y_i)^2$$</center>
 
 ### 정규방정식(Normal Equation)
 경사하강법을 보기 전에 정규방정식이란 것을 봐보자. 정규방정식이란 위의 비용 함수를 최소화하는 \\( W \\)를 찾기 위한 해석적 방법으로, 비용 함수를 \\( W \\)에 대해 정리한 식이다.
