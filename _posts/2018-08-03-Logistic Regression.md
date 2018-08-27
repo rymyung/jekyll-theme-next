@@ -13,8 +13,8 @@ Logistic Regression은 이름에서 Regression이 들어간 것처럼, 회귀 �
 
 # 선형 회귀(Linear Regression)
 선형 회귀의 식은 다음과 같다.
-$$H(X) = W^TX + b = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b$$
-선형 회귀는 독립 변수들과 종속 변수 간의 선형관계를 가정하고 이를 잘 나타내는 회귀계수 $W$를 데이터로부터 추정한다. 선형 회귀는 일반적으로 수치(Continuous) 예측 문제에 사용한다. 분류 모델에 사용할 경우 불가능한 것은 아니지만 예측 결과의 범위가 [$-\infty$, $\infty$]로 [0, 1]의 범위를 넘어가게 된다.
+<center>$$H(X) = W^TX + b = w_1x_1 + w_2x_2 + \cdots + w_kx_k + b$$</center>
+선형 회귀는 독립 변수들과 종속 변수 간의 선형관계를 가정하고 이를 잘 나타내는 회귀계수 $W$를 데이터로부터 추정한다. 선형 회귀는 일반적으로 수치(Continuous) 예측 문제에 사용한다. 분류 모델에 사용할 경우 불가능한 것은 아니지만 예측 결과의 범위가 [$$-\infty$$, $$\infty$$]로 [0, 1]의 범위를 넘어가게 된다.
 
 
 ```R
@@ -48,11 +48,11 @@ ggplot(data, aes(x, y)) + geom_point(color = "grey50") +
 ![Linear](https://www.dropbox.com/s/w9caei57s6tl37z/logistic_1.png?raw=1)
 
 
-이러한 문제를 해결하기 위해 결과값인 $H(X)$를 [0, 1] 범위로 갖게 해주는 연결 함수가 필요하다.
+이러한 문제를 해결하기 위해 결과값인 $$H(X)$$를 [0, 1] 범위로 갖게 해주는 연결 함수가 필요하다.
 
 # 시그모이드 함수(Sigmoid Function)
-이항 분류 문제에 적합한 함수로 시그모이드(Sigmoid) 함수가 있다. 그래프의 모양은 아래와 같이 s자 형태로 x = 0을 중심으로 $-\infty$로 갈수록 0으로 수렴하고 $\infty$로 갈수록 1에 수렴한다. 즉, 모든 $x$값에 대해 [0, 1] 범위의 값을 갖게 해준다.
-$$g(z) = \frac{1}{1 + e^{-z}} = \frac{e^z}{1 + e^z}$$
+이항 분류 문제에 적합한 함수로 시그모이드(Sigmoid) 함수가 있다. 그래프의 모양은 아래와 같이 s자 형태로 x = 0을 중심으로 $$-\infty$$로 갈수록 0으로 수렴하고 $$\infty$$로 갈수록 1에 수렴한다. 즉, 모든 $$x$$값에 대해 [0, 1] 범위의 값을 갖게 해준다.
+<center>$$g(z) = \frac{1}{1 + e^{-z}} = \frac{e^z}{1 + e^z}$$</center>
 
 
 ```R
@@ -72,17 +72,17 @@ ggplot(data2, aes(x, y)) + geom_line() +
 ![Sigmoid](https://www.dropbox.com/s/kd8apunn6wccaks/logistic_2.png?raw=1)
 
 
-이 시그모이드 함수 $g(z)$를 사용하여 $H(X) = W^TX + b$를  $[-\infty, \infty]$ 범위에서 [0, 1] 범위로 바꾸어준다.
-$$g(z) = g(W^TX + b) = \frac{1}{1 + e^{-(W^TX+b)}}$$
+이 시그모이드 함수 $$g(z)$$를 사용하여 $$H(X) = W^TX + b$$를  $$[-\infty, \infty]$$ 범위에서 [0, 1] 범위로 바꾸어준다.
+<center>$$g(z) = g(W^TX + b) = \frac{1}{1 + e^{-(W^TX+b)}}$$</center>
 
 승산(Odds)과 로짓 변환(logit transformation)을 통해 좀 더 자세하게 살펴보자.
 
 ## 승산(Odds)
 승산(Odds)란 성공 확률 / 실패 확률, 임의의 사건 A가 발생하지 않을 확률 대비 발생할 확률을 나타내고 아래와 같이 표현된다.
-$$\text{Odds} = \frac{p(y=1 | x)}{p(y=0 | x)} = \frac{p(y=1|x)}{1-p(y=1|x)} = \frac{p}{1-p}$$
+<center>$$\text{Odds} = \frac{p(y=1 | x)}{p(y=0 | x)} = \frac{p(y=1|x)}{1-p(y=1|x)} = \frac{p}{1-p}$$</center>
 
-여기서 $p = p(y=1|x)$는 성공 확률을 나타내므로 [0, 1] 사이의 값을 가진다. 따라서 위의 Odds는 [0, $\infty$] 사이의 값을 갖게된다.
-$$\text{Odds} = \begin{cases} \infty, & \text{if } p = 1 \\ 0, & \text{if } p = 0 \end{cases}$$
+여기서 $$p = p(y=1|x)$$는 성공 확률을 나타내므로 [0, 1] 사이의 값을 가진다. 따라서 위의 Odds는 [0, $$\infty$$] 사이의 값을 갖게된다.
+<center>$$\text{Odds} = \begin{cases} \infty, & \text{if } p = 1 \\ 0, & \text{if } p = 0 \end{cases}$$</center>
 
 
 ```R
@@ -94,15 +94,15 @@ ggplot(data.frame(p = p, odds = odds), aes(p, odds)) + geom_line() + theme_bw()
 
 
 
-![Odds](https://www.dropbox.com/s/8jphoahd0yoy055/logistic_3.png?dl=raw=1)
+![Odds](https://www.dropbox.com/s/8jphoahd0yoy055/logistic_3.png?raw=1)
 
 
 ## 로짓 변환(logit transformation)
 로짓 변환은 승산(Odds)에 log를 취한 값으로 아래와 같이 표현된다.
-$$\ln (\text{Odds}) = \ln \frac{p}{1-p}$$
+<center>$$\ln (\text{Odds}) = \ln \frac{p}{1-p}$$</center>
 
-Odds가 [0, $\infty$] 사이의 값을 가지므로 자연 로그를 취한 값의 범위는 [-$\infty$, $\infty$]이 된다.
-$$\ln (\text{Odds}) = \begin{cases} \infty, & \text{if } \text{Odds} = \infty \\ -\infty, & \text{if } \text{Odds} = 0\end{cases}$$
+Odds가 [0, $$\infty$$] 사이의 값을 가지므로 자연 로그를 취한 값의 범위는 [-$$\infty$$, $$\infty$$]이 된다.
+<center>$$\ln (\text{Odds}) = \begin{cases} \infty, & \text{if } \text{Odds} = \infty \\ -\infty, & \text{if } \text{Odds} = 0\end{cases}$$</center>
 
 
 ```R
@@ -116,30 +116,30 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 ![Log Odds](https://www.dropbox.com/s/mga9nv0hr4ch0af/logistic_4.png?raw=1)
 
 
-결국 확률 $p = p(y=1|x)$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 [0, 1] 범위에서 [-$\infty$, $\infty$] 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 $p$를 찾아야 하므로, 이 함수를 $p$에 대한 함수로 변환시키면 다음과 같다.
+결국 확률 $$p = p(y=1|x)$$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 [0, 1] 범위에서 [-$$\infty$$, $$\infty$$] 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 $$p$$를 찾아야 하므로, 이 함수를 $$p$$에 대한 함수로 변환시키면 다음과 같다.
 
-$$\ln \frac{p}{1-p} = W^TX + b$$
+<center>$$\ln \frac{p}{1-p} = W^TX + b$$</center>
 
-$$\frac{p}{1-p} = e^{W^TX + b}$$
+<center>$$\frac{p}{1-p} = e^{W^TX + b}$$</center>
 
-$$\frac{1-p}{p} = \frac{1}{p} - 1 = \frac{1}{e^{W^TX + b}}$$
+<center>$$\frac{1-p}{p} = \frac{1}{p} - 1 = \frac{1}{e^{W^TX + b}}$$</center>
 
-$$\frac{1}{p} = \frac{1}{e^{W^TX + b}} + 1 = \frac{1 + e^{W^TX + b}}{e^{W^TX + b}}$$
+<center>$$\frac{1}{p} = \frac{1}{e^{W^TX + b}} + 1 = \frac{1 + e^{W^TX + b}}{e^{W^TX + b}}$$</center>
 
-$$p = \frac{e^{W^X + b}}{1 + e^{W^TX + b}} = \frac{1}{1 + e^{-(W^TX + b)}}$$
+<center>$$p = \frac{e^{W^X + b}}{1 + e^{W^TX + b}} = \frac{1}{1 + e^{-(W^TX + b)}}$$</center>
 
 # 회귀 계수 추정
 선형 회귀와 마찬가지로 로지스틱 회귀에서도 회귀 계수를 추정하기 위해 경사하강법(Gradient Descent)을 사용한다. 하지만 선형 회귀에서 사용한 비용 함수(cost function)를 사용하게 될 경우, optimization problem이 non-convex가 되어서 Local Optima에 빠질 수 있다.
 
 따라서 로지스틱 회귀에서는 다음과 같은 손실 함수를 사용한다.
-$$\text{Loss Function} : L(\hat{y}, y) = -(y\log\hat{y} + (1-y)\log(1-\hat{y}))$$
+<center>$$\text{Loss Function} : L(\hat{y}, y) = -(y\log\hat{y} + (1-y)\log(1-\hat{y}))$$</center>
 
 손실 함수가 작을 수록 좋으므로 실제 값($y$)에 따라 손실 함수가 다음과 같이 변한다.
-$$\text{Loss Function} = \begin{cases} -\log \hat{y}, & \text{if } y = 1 \rightarrow \text{가능한 큰 }\hat{y}(=1)\text{을 원함} \\ -\log (1-\hat{y}), & \text{if } y = 0 \rightarrow \text{가능한 작은 }\hat{y}(=0)\text{을 원함} \end{cases}$$
+<center>$$\text{Loss Function} = \begin{cases} -\log \hat{y}, & \text{if } y = 1 \rightarrow \text{가능한 큰 }\hat{y}(=1)\text{을 원함} \\ -\log (1-\hat{y}), & \text{if } y = 0 \rightarrow \text{가능한 작은 }\hat{y}(=0)\text{을 원함} \end{cases}$$</center>
 
 위의 손실 함수는 single training sample에 대한 것이므로, 전체 trianing sample에 대한 비용 함수는 다음과 같다.
-$$\text{Cost Function} : J(W, b) = \frac{1}{m} \sum L(\hat{y}, y)$$ 
-$$\text{ m = training sample 수}$$
+<center>$$\text{Cost Function} : J(W, b) = \frac{1}{m} \sum L(\hat{y}, y)$$ </center>
+<center>$$\text{ m = training sample 수}$$</center>
 
 # 로지스틱 모델 해석
 
@@ -214,13 +214,13 @@ summary(logit.fit)
 
 학습한 결과를 보면, gre 변수의 P-value가 0.335290으로 유의 수준보다 높아 통계적으로 유의미하지 않다.
 
-로지스틱 회귀 모델에서 회귀 계수는 변수가 한 단위 증가할 때 log(Odds)의 변화량을 의미한다. gpa의 계수는 1.036299이다. gpa 점수가 1점 증가할 때 log(Odds)는 $\log{(\text{Odds})} = \log{\frac{p}{1-p}} = 1.036299$만큼 증가한다. 즉,
+로지스틱 회귀 모델에서 회귀 계수는 변수가 한 단위 증가할 때 log(Odds)의 변화량을 의미한다. gpa의 계수는 1.036299이다. gpa 점수가 1점 증가할 때 log(Odds)는 $$\log{(\text{Odds})} = \log{\frac{p}{1-p}} = 1.036299$$만큼 증가한다. 즉,
 
-$$\ln{\frac{p}{1-p}} = 1.036299$$
+<center>$$\ln{\frac{p}{1-p}} = 1.036299$$</center>
 
-$$\frac{p}{1-p} = \exp^{0.773778} = 2.8187$$
+<center>$$\frac{p}{1-p} = \exp^{0.773778} = 2.8187$$</center>
 
-$$p = \frac{2.8187}{1 + 2.8187} = 0.7381$$
+<center>$$p = \frac{2.8187}{1 + 2.8187} = 0.7381$$</center>
 결국 gpa 점수가 1점 증가할 때 입학 확률(= p)가 0.7381배 증가한다.
 
 범주형 변수인 rank의 경우에는 해석이 약간 달라진다. rank2의 계수 -0.756383은 rank1에서 rank2로 바뀌었을 때 log(Odds)의 변화량을 의미한다. 즉, rank1에 비해 rank2가 입학에 안 좋은 영향을 준다.
