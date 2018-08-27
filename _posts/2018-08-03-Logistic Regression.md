@@ -141,6 +141,100 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 <center>$$\text{Cost Function} : J(W, b) = \frac{1}{m} \sum L(\hat{y}, y)$$ </center>
 <center>$$\text{ m = training sample 수}$$</center>
 
+![Logistic Regression Gradient Descent](https://www.dropbox.com/s/v1dbvpozhczoyzn/logistic_gradient_descent.jpg?raw=1)
+
+$$da = \frac{d}{da}L(a, y) = \frac{d}{da}(-y\log{a} -(1-y)\log{(1-a)}) = \frac{-y}{a} + \frac{1-y}{1-a}$$
+
+$$dz = \frac{dL}{dz} = \frac{dL}{da} \cdot \frac{da}{dz} = da \cdot \sigma^\prime(z) = a - y$$
+
+$$dw = dz \cdot x$$
+$$db = dz$$
+
+```R
+# Set seed
+set.seed(1990)
+
+# Generate data
+x3 <- seq(-5, 6, 0.5)
+y3_temp <- 1/(1+exp(-(3*x3 + 2))) # W = 3, b = 2
+y3 <- ifelse(y3_temp >= 0.5, 1, 0)
+
+# Load library
+library(dplyr)
+
+# Initialize w randomly
+w <- sample(seq(-0.1, 0.1, length.out = 100), 2) %>% matrix(nrow = 2)
+previous_cost <- NULL
+learning_rate <- 0.01
+epsilon <- 0.00001
+
+cost_list <- c()
+w1_list <- c()
+w2_list <- c()
+for (i in 1:10000) { # Iterate 10000 times
+    y_hat <- 1/(1+exp(-(w[1]*x3 + w[2]))) # Predict y
+    
+    # Calculate cost
+    cost_temp <- c()
+    for (j in 1:length(y3)) {
+        if (y3[j] == 1) {
+            cost <- -log(y_hat[j])
+        } else if (y3[j] == 0) {
+            cost <- -log(1-y_hat[j])
+        }
+        cost_temp <- c(cost_temp, cost)
+    }
+    cost <- sum(cost_temp) 
+    
+    if (i > 1) { # Check after first prediction
+        if (epsilon > abs(previous_cost - cost)) { # Break if cost change amount is less than threshold
+            cat("Stop at iter", i, ", Cost change amount is less than threshold", "\n")
+            break
+        }
+    }
+    previous_cost <- cost # Change the previous cost
+    cost_list <- c(cost_list, cost) # Reserve the cost
+    
+    # Update W
+    w[1] <- w[1] - learning_rate * mean((y_hat-y3)*x3)
+    w[2] <- w[2] - learning_rate * mean((y_hat-y3))
+    
+    # Reserve the weights
+    w1_list <- c(w1_list, w[1])
+    w2_list <- c(w2_list, w[2])
+}
+# Print final weights
+cat("Cost :", cost_list[length(cost_list)], "\n", "W1 :", w1_list[length(w1_list)], "\n", "W2 :", w2_list[length(w2_list)])
+
+# Make dataframe for plotting
+cost.df <- data.frame(iter = 1:length(cost_list), cost = cost_list, w1 = w1_list, w2 = w2_list)
+```
+
+    Cost : 1.051453 
+     W1 : 3.038138 
+     W2 : 1.967545
+
+경사하강법을 통해 구한 회귀 계수는 $\hat{W} = \begin{bmatrix} 3.038138  \\ 1.967545 \end{bmatrix}$로 실제 $W = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$와 유사하다.
+
+
+```R
+cost.df %>% filter(iter > 30) %>%
+ggplot() + geom_line(aes(iter, w1, col = 'steelblue'), size = 1) + 
+geom_line(aes(iter, w2, col = 'palegreen3'), size = 1) + 
+ geom_line(aes(iter, cost, col = 'darkorange'), size = 1) + 
+ylab("Value") + theme_minimal() + scale_colour_manual(name = 'Type', 
+                      values =c('steelblue'='steelblue','palegreen3'='palegreen3', 'darkorange'='darkorange'), 
+                                                      labels = c('Cost', 'Weight 2', 'Weight 1')) +
+theme(legend.position = "top")
+```
+
+
+
+
+![Logistic Regression Gradient Descent2](https://www.dropbox.com/s/6a02l219kr2ynrs/logistic_7.png?raw=1)
+
+
+
 # 로지스틱 모델 해석
 
 로지스틱 회귀 모델의 계수는 선형 회귀 모델의 계수가 하는 것과 유사한 방식으로 설명 변수와 반응 변수 간의 관계를 나타낸다. UCLA에서 제공하는 데이터를 사용해 로지스틱 모델을 만들어보자.
