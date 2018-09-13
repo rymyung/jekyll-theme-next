@@ -69,7 +69,7 @@ RMSE 외에도 MAE(Mean Absolute Error), MAPE(Mean Absolute Percentage Error) �
 ### 결정계수(\\(R^2 \\))
 결정 계수는 회귀 모델의 설명력은 표현하는 지표로, 모델에 의해 설명되는 y 분산의 비율로 간주된다. 0에 가까울수록 설명력이 낮고, 1에 가까울수록 설명력이 높다.  
 <center>$$ \mathbf{R^2} = \frac{\mathbf{SSR}}{\mathbf{SST}} = 1 - \frac{\mathbf{SSE}}{\mathbf{SST}}$$</center>  
-로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다. 자세한 설명은 [Linear Regression]()을 참고.
+로, SST와 SSR이 얼마나 비슷한지, SSE가 얼마나 다른지에 따라 결정된다.
 
 
 ```R
@@ -183,7 +183,7 @@ print(confusionMatrix(data = test.pred, reference = test$target, mode = "everyth
 로, 약 84%의 정확도를 가지고 있다. 즉, 전체 사람들 중 약 16%는 잘못 예측되었다.
 
 #### 클래스 불균형(Unbalanced Class) 문졔
-암 진단과 같은 1과 0의 숫자가 매우 크게 차이가 나는 경우를 클래스 불균형 문제라고 한다. 이러한 문제에서는 대부분의 경우(99% 이상)이 0이기 때문에 정확도를 평가 지표로 하는 것은 좋은 방법이 아니다. [클래스 불균형]() 참고.
+암 진단과 같은 1과 0의 숫자가 매우 크게 차이가 나는 경우를 클래스 불균형 문제라고 한다. 이러한 문제에서는 대부분의 경우(99% 이상)이 0이기 때문에 정확도를 평가 지표로 하는 것은 좋은 방법이 아니다.
 
 ### 정밀도(Precision)
 정밀도는 양성(=1)으로 예측한 것이 얼마나 정확한지를 판별하는 지표로, 확인을 위한 측정 도구이다.  
@@ -254,7 +254,6 @@ plot(perf)
 머신러닝에서 모델의 에러는 두 가지로 분류할 수 있다. 바로 편향(Bias)와 분산(Variance)이다. 편향이 올라가면 분산이 내려가고, 편향이 내려가면 분산이 올라가는데 이를 편향 - 분산 trade-off라 한다.
 
 ![Bias-Variance Trade-off](https://www.dropbox.com/s/4smjjxketgwdzez/bias-variance-tradeoff.jpg?raw=1)  
-[<center>이미지 출처</center>](https://tex.stackexchange.com/questions/307117/reconstructing-the-following-bias-variance-diagram)  
 
 * 편향 
     * 실제 문제를 단순한 모델로 근사시킴으로 인해 발생되는 오차
@@ -267,8 +266,7 @@ plot(perf)
     
     
 
-![Overfitting](https://www.dropbox.com/s/g59jln9m3s0gpu9/overfitting_eg.jpg?raw=1)  
-[<center>이미지 출처</center>](https://dadosreais.wordpress.com/2016/12/20/causal-inference-in-practice-with-observational-data-machine-learning-heterogeneity-metric-ks-x2-tests-optimize-function-metric-cache-h2o-ai/)  
+![Overfitting](https://www.dropbox.com/s/g59jln9m3s0gpu9/overfitting_eg.jpg?raw=1) 
 Bias가 높고(Inaccurate) Variance가 낮은(Robust)한 모델은 Underfitting되어 있다. Underfitting의 경우, 훈련 데이터를 사용해 예측한 값과 다른 데이터를 사용해 예측한 값의 차이는 적지만, 실제 값과의 차이는 크다.
 Bias가 낮고(Flexible) Variance가 높은(Susceptible)한 모델은 Overfitting 되어 있다. Overfitting의 경우, 훈련 데이터를 사용해 예측한 값은 실제 값과 차이가 적으나, 다른 데이터를 사용해 예측한 값은 실제 값과 차이가 크다.
 
@@ -322,8 +320,7 @@ theme(legend.position = "top")
 
 
 ### K-fold Cross Validation
-![cross validation](https://www.dropbox.com/s/8pqumzcqda0q4ke/cv.jpg?raw=1)  
-[<center>이미지 출처</center>](https://www.researchgate.net/figure/The-K-fold-cross-validation-scheme-133-Each-of-the-K-partitions-is-used-as-a-test_fig10_323969239)  
+![cross validation](https://www.dropbox.com/s/8pqumzcqda0q4ke/cv.jpg?raw=1) 
 전체 데이터를 크기가 같은 k개의 fold로 분할한다. 그리고 첫 번째 fold를 테스트 데이터, 나머지 k-1개 fold를 훈련 데이터로 구성하여 모델을 만들고 성능을 평가한다. 그 후 테스트 데이터가 되는 fold를 바꿔가면서 k번 반복 후, 성능의 평균값을 최종 성능으로 간주한다.
 
 

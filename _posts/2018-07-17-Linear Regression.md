@@ -119,7 +119,6 @@ lm.pred <- predict(lm.fit, newdata = test)
 * \\( \varepsilon_i \\)들은 서로 독립적이다.
 
 ![선형회귀도해](https://www.dropbox.com/s/yxan4ive93j4yyn/error%20term.jpg?raw=1)
-[<center>이미지 출처</center>](http://reliawiki.org/index.php/Simple_Linear_Regression_Analysis)
 
 오차항 \\( \varepsilon_i \\)가 확률변수이므로, \\( y_i \\)도 확률변수가 된다. 또한 \\( E(\varepsilon_i) = 0 \\)이므로
 <center>$$E(y_i) = E(\beta_0 + \beta_1x_1 + \cdots + \beta_nx_n + \varepsilon_i) = \beta_0 + \beta_1x_1 + \cdots + \beta_nx_n$$</center>가 된다. 위 식을 모든 x와 y에 대하여 나타내면,
@@ -378,7 +377,6 @@ print(solve(t(x_mat) %*% x_mat) %*% (t(x_mat) %*% y_mat))
 <center>$$W := W - \alpha \frac{1}{m}\sum_{i=1}^m (Wx_i - y_i)x_i$$</center>
 
 ![경사하강법](https://www.dropbox.com/s/koln95uz33729c3/gradient%20descent.jpg?raw=1)
-[<center>이미지 출처</center>](http://gdyoon.tistory.com/9)  
 비용 함수의 W에서의 기울기(\\( \frac{\partial}{\partial W}cost(W) \\))가 음수(빨간 선)이면 \\( W \\)는 학습률(learning rate)배 만큼 증가하고 양수이면 학습률 배 만큼 감소하면서 비용 함수가 최소가 되는 지점을 찾는다. 다음 예시를 보자.
 
 
