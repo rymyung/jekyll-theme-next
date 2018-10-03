@@ -116,7 +116,7 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 ![Log Odds](https://www.dropbox.com/s/mga9nv0hr4ch0af/logistic_4.png?raw=1)
 
 
-결국 확률 $$p = p(y=1|x)$$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 $$[0, 1]$$ 범위에서 $$[-\infty, \infty]$$ 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 $$p$$를 찾아야 하므로, 이 함수를 $$p$$에 대한 함수로 변환시키면 다음과 같다.
+결국 확률 $$p = p(y=1|x)에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 [0, 1] 범위에서 [-\infty, \infty] 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 p를 찾아야 하므로, 이 함수를 p에 대한 함수로 변환시키면 다음과 같다.$$
 
 <center>$$\ln \frac{p}{1-p} = W^TX + b$$</center>
 
@@ -214,7 +214,7 @@ cost.df <- data.frame(iter = 1:length(cost_list), cost = cost_list, w1 = w1_list
      W1 : 3.038138 
      W2 : 1.967545
 
-경사하강법을 통해 구한 회귀 계수는 $$\hat{W} = \begin{bmatrix} 3.038138  \\ 1.967545 \end{bmatrix}$로 실제 $W = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$와 유사하다.
+경사하강법을 통해 구한 회귀 계수는 $$\hat{W} = \begin{bmatrix} 3.038138  \\ 1.967545 \end{bmatrix}$$로 실제 $$W = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$와 유사하다.
 
 
 ```R
