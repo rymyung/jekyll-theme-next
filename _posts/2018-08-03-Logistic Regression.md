@@ -116,7 +116,7 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 ![Log Odds](https://www.dropbox.com/s/mga9nv0hr4ch0af/logistic_4.png?raw=1)
 
 
-결국 확률 $$p = p(y=1|x)$$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 [0, 1] 범위에서 [-$$\infty$$, $$\infty$$] 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 $$p$$를 찾아야 하므로, 이 함수를 $$p$$에 대한 함수로 변환시키면 다음과 같다.
+결국 확률 $$p = p(y=1|x)$$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 $$[0, 1]$$ 범위에서 $$[-\infty, \infty]$$ 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 $$p$$를 찾아야 하므로, 이 함수를 $$p$$에 대한 함수로 변환시키면 다음과 같다.
 
 <center>$$\ln \frac{p}{1-p} = W^TX + b$$</center>
 
@@ -134,7 +134,7 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 따라서 로지스틱 회귀에서는 다음과 같은 손실 함수를 사용한다.
 <center>$$\text{Loss Function} : L(\hat{y}, y) = -(y\log\hat{y} + (1-y)\log(1-\hat{y}))$$</center>
 
-손실 함수가 작을 수록 좋으므로 실제 값($y$)에 따라 손실 함수가 다음과 같이 변한다.
+손실 함수가 작을 수록 좋으므로 실제 값($$y$$)에 따라 손실 함수가 다음과 같이 변한다.
 <center>$$\text{Loss Function} = \begin{cases} -\log \hat{y}, & \text{if } y = 1 \rightarrow \text{가능한 큰 }\hat{y}(=1)\text{을 원함} \\ -\log (1-\hat{y}), & \text{if } y = 0 \rightarrow \text{가능한 작은 }\hat{y}(=0)\text{을 원함} \end{cases}$$</center>
 
 위의 손실 함수는 single training sample에 대한 것이므로, 전체 trianing sample에 대한 비용 함수는 다음과 같다.
@@ -214,7 +214,7 @@ cost.df <- data.frame(iter = 1:length(cost_list), cost = cost_list, w1 = w1_list
      W1 : 3.038138 
      W2 : 1.967545
 
-경사하강법을 통해 구한 회귀 계수는 $\hat{W} = \begin{bmatrix} 3.038138  \\ 1.967545 \end{bmatrix}$로 실제 $W = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$와 유사하다.
+경사하강법을 통해 구한 회귀 계수는 $$\hat{W} = \begin{bmatrix} 3.038138  \\ 1.967545 \end{bmatrix}$로 실제 $W = \begin{bmatrix} 3 \\ 2 \end{bmatrix}$$와 유사하다.
 
 
 ```R
