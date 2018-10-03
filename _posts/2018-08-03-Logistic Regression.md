@@ -116,6 +116,9 @@ ggplot(data.frame(p = p, log_odds = log_odds), aes(p, log_odds)) + geom_line() +
 ![Log Odds](https://www.dropbox.com/s/mga9nv0hr4ch0af/logistic_4.png?raw=1)
 
 
+
+$$\text{    }$$
+
 결국 확률 $$p = p(y=1 | x)$$에 대해 승산 비를 구하고 거기에 자연 로그를 취했더니 [0, 1] 범위에서 [-$$\infty$$, $$\infty$$] 범위로 확장되는 함수가 만들어졌다. 이 함수를 이용하여 확률 p를 찾아야 하므로, 이 함수를 p에 대한 함수로 변환시키면 다음과 같다.
 
 <center>$$\ln \frac{p}{1-p} = W^TX + b$$</center>
