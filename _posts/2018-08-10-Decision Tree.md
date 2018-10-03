@@ -29,39 +29,39 @@ Decision Tree란 독립변수들을 이진 분리 혹은 다진 분리를 하는
 
 ## Entropy
 Entropy란 '얼마만큼의 정보를 담고 있는가'를 나타내는 것이다. 만약 하나의 집합에 단 하나의 클래스만 존재한다면, 불확실성이 전혀 없고 Entropy는 매우 낮은 값을 갖는다. 반면 모든 클래스가 고르게 분포한다면, 불확실성은 매우 높고 Entropy는 매우 높은 값을 갖는다. 노드 A의 Entropy는 다음과 같이 계산한다.
-$$\text{Entropy}(A) = -\sum_{j=1}^{m} p_j\log_2{p_j}$$
-$$p_j : \text{노드 A에 속하는 데이터 중 j 클래스에 속하는 데이터의 비율}$$
+<center>$$\text{Entropy}(A) = -\sum_{j=1}^{m} p_j\log_2{p_j}$$</center>
+<center>$$p_j : \text{노드 A에 속하는 데이터 중 j 클래스에 속하는 데이터의 비율}$$</center>
 
 의사결정나무에서는 가장 많은 정보(정보 획득)를 주는 변수를 선택하여 분기를 진행한다. 정보 획득이란 노드 분기 전후의 정보량의 차이로, 다음 분류 스텝에서 특정 변수를 선택했을 때 전체 데이터의 Entropy가 줄어든 양을 나타낸다.  
-* 클래스 집합 : $C = {C_1, C_2, \cdots, C_k}$
-* Train data set의 부분 집합(= 하나의 Node) : $T$
-* $T$ Node 내의 Class $C_j$의 수 : $freq(C_j, T)$
-* $T$ Node 내의 데이터 수 : $\left\vert T \right\vert$
-* Node내 데이터들의 Class 확인에 필요한 정보량 : : $Info(T) = -\sum \frac{freq(C_j, T)}{\left\vert T \right\vert} \times \log_2{\frac{freq(C_j, T)}{\left\vert T \right\vert}}$
-* 변수 X에 의해 분기된 Node들의 정보량들의 가중 평균 : $Info_X(T) = \sum_{i=1}^{n} \frac{\left\vert T_i \right\vert}{\left\vert T \right\vert} \times Info(T_i)$
-* 정보 획득 : $Gain(X) = Info(T) - Info_X(T)$  
+* 클래스 집합 : $$C = {C_1, C_2, \cdots, C_k}$$
+* Train data set의 부분 집합(= 하나의 Node) : $$T$$
+* $$T$$ Node 내의 Class $$C_j$$의 수 : $$freq(C_j, T)$$
+* $$T$$ Node 내의 데이터 수 : $$\left\vert T \right\vert$$
+* Node내 데이터들의 Class 확인에 필요한 정보량 : : $$Info(T) = -\sum \frac{freq(C_j, T)}{\left\vert T \right\vert} \times \log_2{\frac{freq(C_j, T)}{\left\vert T \right\vert}}$$
+* 변수 X에 의해 분기된 Node들의 정보량들의 가중 평균 : $$Info_X(T) = \sum_{i=1}^{n} \frac{\left\vert T_i \right\vert}{\left\vert T \right\vert} \times Info(T_i)$$
+* 정보 획득 : $$Gain(X) = Info(T) - Info_X(T)$$  
 
-정보 획득($Gain(X)$)가 최대가 되는 변수 X를 선택하여 분기를 진행한다.
+정보 획득($$Gain(X)$$)가 최대가 되는 변수 X를 선택하여 분기를 진행한다.
 
 다음은 Entropy를 이용하여 분기를 진행하는 예시이다.
 ![Information Gain](https://www.dropbox.com/s/r531qz06avaayrm/informationgain.jpg?raw=1)
-$$Info(T) = -\frac{9}{14}\cdot\log_2{\left(\frac{9}{14}\right)} -\frac{5}{14}\cdot\log_2{\left(\frac{5}{14}\right)} = 0.940$$
+<center>$$Info(T) = -\frac{9}{14}\cdot\log_2{\left(\frac{9}{14}\right)} -\frac{5}{14}\cdot\log_2{\left(\frac{5}{14}\right)} = 0.940$$</center>
 
-$$Info_X(T) = \frac{5}{14}\cdot\left(-\frac{2}{5}\cdot \log_2{\left(\frac{2}{5}\right)} -\frac{3}{5}\cdot \log_2{\left(\frac{3}{5}\right)}\right) + \frac{5}{14}\cdot\left(-\frac{3}{5}\cdot\log_2{\left(\frac{3}{5}\right)} -\frac{2}{5}\cdot\log_2{\left(\frac{2}{5}\right)}\right) + \frac{4}{14}\cdot\left(-\frac{4}{4}\cdot\log_2{\left(\frac{4}{4}\right)} -\frac{0}{4}\cdot\log_2{\left(\frac{0}{4}\right)}\right) = 0.694$$
+<center>$$Info_X(T) = \frac{5}{14}\cdot\left(-\frac{2}{5}\cdot \log_2{\left(\frac{2}{5}\right)} -\frac{3}{5}\cdot \log_2{\left(\frac{3}{5}\right)}\right) + \frac{5}{14}\cdot\left(-\frac{3}{5}\cdot\log_2{\left(\frac{3}{5}\right)} -\frac{2}{5}\cdot\log_2{\left(\frac{2}{5}\right)}\right) + \frac{4}{14}\cdot\left(-\frac{4}{4}\cdot\log_2{\left(\frac{4}{4}\right)} -\frac{0}{4}\cdot\log_2{\left(\frac{0}{4}\right)}\right) = 0.694$$</center>
 
-$$Gain(X) = Info(T) - Info_X(T) = 0.246$$
+<center>$$Gain(X) = Info(T) - Info_X(T) = 0.246$$</center>
 
 ## Gini Index
 Gini Index는 집합에 이질적인 것이 얼마나 섞였는지를 측정하는 지표이다. 어떤 집합에서 한 항목을 뽑아 무작위로 라벨을 추정할 때 틀릴 확률을 말한다. 집합에 있는 항목이 모두 같다면 Gini Index는 0을 갖게 되며 완전히 순수하다고 말할 수 있다.
-$$Gini(T) = 1 - \sum_{j=1}^{k}\left(\left(\frac{freq(C_j, T)}{\left\vert T \right\vert}\right)^2\right) = 1 - \sum_{j=1}^{k} p_j^2$$
+<center>$$Gini(T) = 1 - \sum_{j=1}^{k}\left(\left(\frac{freq(C_j, T)}{\left\vert T \right\vert}\right)^2\right) = 1 - \sum_{j=1}^{k} p_j^2$$</center>
 
-$$Gini_X(T) = \frac{\left\vert T_1 \right\vert}{\left\vert T \right\vert}Gini(T_1) + \frac{\left\vert T_2 \right\vert}{\left\vert T \right\vert}Gini(T_2)$$
+<center>$$Gini_X(T) = \frac{\left\vert T_1 \right\vert}{\left\vert T \right\vert}Gini(T_1) + \frac{\left\vert T_2 \right\vert}{\left\vert T \right\vert}Gini(T_2)$$</center>
 
-$Gini_X(T)$가 최소가 되는 변수 X를 선택한다.
+$$Gini_X(T)$$가 최소가 되는 변수 X를 선택한다.
 
 다음은 Gini Index를 사용하여 분기를 진행하는 예시이다.
 ![Gini Index](https://www.dropbox.com/s/cqb95d6ivrnhsp8/giniindex.jpg?raw=1)
-$$Gini_X(T) = \frac{3}{8} Gini(T_1) + \frac{5}{8} Gini(T_2) = \frac{3}{8}\left(1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 \right) + \frac{5}{8}\left(1 - \left(\frac{4}{5}\right)^2 - \left(\frac{1}{5}\right)^2\right)$$
+<center>$$Gini_X(T) = \frac{3}{8} Gini(T_1) + \frac{5}{8} Gini(T_2) = \frac{3}{8}\left(1 - \left(\frac{1}{3}\right)^2 - \left(\frac{2}{3}\right)^2 \right) + \frac{5}{8}\left(1 - \left(\frac{4}{5}\right)^2 - \left(\frac{1}{5}\right)^2\right)$$</center>
 
 아래는 클래스가 2개일 때 하나의 클래스의 비율에 따른 Entropy와 Gini Index의 변화량을 나타내는 그래프이다.
 
