@@ -1,5 +1,5 @@
 ---
-title: 의사결정나무(Logistic Regression)
+title: 의사결정나무(Decision Tree)
 date: 2018-08-10 18:23:00
 categories:
 - Algorithm
