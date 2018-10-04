@@ -202,9 +202,9 @@ print(confusionMatrix(data = test.pred, reference = test$target, mode = "everyth
 
 ### F1 Score
 F1 Score는 정밀도와 재현율의 조합으로 된 지표이다.  
-<center>$$ \mathbf{F1} = \frac{\mathbf{Precision} \times \mathbf{Recall}}{(\mathbf{Precision} + \mathbf{Recall})}$$</center>  
+<center>$$ \mathbf{F1} = 2 \cdot \frac{\mathbf{Precision} \times \mathbf{Recall}}{(\mathbf{Precision} + \mathbf{Recall})}$$</center>  
 위의 예제에서 F1 Score를 계산해보면,  
-<center>$$\frac{0.8522 \times 0.9593}{(0.8522 + 0.9593)} = 0.9026$$</center>  
+<center>$$2 \cdot \frac{0.8522 \times 0.9593}{(0.8522 + 0.9593)} = 0.9026$$</center>  
 이다.
 
 ### 특이도(Specificity) / 참음성률(True Negative Rate)
