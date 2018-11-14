@@ -112,3 +112,295 @@ df %>% gather(key = "type", value = "Impurity", -p) %>%
 ## 단점
 * 결정경계가 데이터 축에 수직적이여서 비선형 데이터 분류에는 적합하지 않음
 * 연속형 변수를 비연속적인 값으로 취급하기 때문에 분리의 경계점 근방에서는 예측 오류가 클 가능성이 높음
+
+# R코드
+
+
+```R
+# Load library
+library(caret)
+library(ISLR)
+library(tree)
+library(rpart)
+library(party)
+
+# Load data
+data(Default)
+
+# Split data
+set.seed(1990)
+train_idx <- createDataPartition(y = Default$default, p = 0.7, list = F)
+train <- Default[train_idx,]
+test <- Default[-train_idx,]
+```
+
+<code>R</code>에서 의사결정나무 분석을 위한 패키지는 대표적으로 <code>tree</code>, <code>rpart</code>, <code>party</code>가 있다.
+
+## Tree Package
+
+### 모델 형성
+
+
+```R
+tree.fit <- tree(default ~ ., data = train)
+```
+
+
+```R
+plot(tree.fit)
+text(tree.fit,  pretty = 0)
+```
+
+
+![dt1](https://www.dropbox.com/s/i5hv81kjvab02rk/dt1.png?raw=1)
+
+
+### 가지치기(pruning)
+
+
+```R
+tree.cv <- cv.tree(tree.fit, FUN = prune.misclass)
+plot(tree.cv)
+```
+
+
+![dt2](https://www.dropbox.com/s/7428fs1lg61x8pd/dt2.png?raw=1)
+
+
+
+```R
+prune.tree <- prune.misclass(tree.fit, best = 3)
+```
+
+
+```R
+plot(prune.tree)
+text(prune.tree, pretty = 0)
+```
+
+
+![dt3](https://www.dropbox.com/s/p3kjm2d4wd3wiji/dt3.png?raw=1)
+
+
+### 예측 및 평가
+
+
+```R
+tree.pred <- predict(prune.tree, test, type = "class")
+```
+
+
+```R
+confusionMatrix(tree.pred, test$default, positive = "Yes", mode = "everything")
+```
+
+
+    Confusion Matrix and Statistics
+    
+              Reference
+    Prediction   No  Yes
+           No  2856   53
+           Yes   44   46
+                                              
+                   Accuracy : 0.9677          
+                     95% CI : (0.9607, 0.9737)
+        No Information Rate : 0.967           
+        P-Value [Acc > NIR] : 0.4452          
+                                              
+                      Kappa : 0.4701          
+     Mcnemar's Test P-Value : 0.4166          
+                                              
+                Sensitivity : 0.46465         
+                Specificity : 0.98483         
+             Pos Pred Value : 0.51111         
+             Neg Pred Value : 0.98178         
+                  Precision : 0.51111         
+                     Recall : 0.46465         
+                         F1 : 0.48677         
+                 Prevalence : 0.03301         
+             Detection Rate : 0.01534         
+       Detection Prevalence : 0.03001         
+          Balanced Accuracy : 0.72474         
+                                              
+           'Positive' Class : Yes             
+                                              
+
+
+## rpart 패키지
+
+### 모델 형성
+
+
+```R
+rpart.fit <- rpart(default ~ ., data = train, method = "class")
+```
+
+
+```R
+plot(rpart.fit)
+text(rpart.fit)
+```
+
+
+![dt4](https://www.dropbox.com/s/r9b31d4ph1igwyb/dt4.png?raw=1)
+
+
+### 가지치기(pruning)
+
+
+```R
+printcp(rpart.fit)
+```
+
+    
+    Classification tree:
+    rpart(formula = default ~ ., data = train, method = "class")
+    
+    Variables actually used in tree construction:
+    [1] balance income 
+    
+    Root node error: 234/7001 = 0.033424
+    
+    n= 7001 
+    
+            CP nsplit rel error  xerror     xstd
+    1 0.102564      0   1.00000 1.00000 0.064270
+    2 0.085470      1   0.89744 1.00427 0.064403
+    3 0.017094      2   0.81197 0.88034 0.060427
+    4 0.010000      6   0.74359 0.88462 0.060569
+    
+
+
+```R
+plotcp(rpart.fit)
+```
+
+
+![dt5](https://www.dropbox.com/s/fyycem8wsmqp1sb/dt5.png?raw=1)
+
+
+
+```R
+prune.rpart <- prune(rpart.fit, cp = rpart.fit$cptable[which.min(rpart.fit$cptable[,"xerror"]),"CP"])
+```
+
+
+```R
+plot(prune.rpart)
+text(prune.rpart)
+```
+
+
+![dt6](https://www.dropbox.com/s/pcja028nmndse86/dt6.png?raw=1)
+
+
+### 예측 및 평가
+
+
+```R
+rpart.pred <- predict(prune.rpart, test, type = "class")
+```
+
+
+```R
+confusionMatrix(rpart.pred, test$default, positive = "Yes", mode = "everything")
+```
+
+
+    Confusion Matrix and Statistics
+    
+              Reference
+    Prediction   No  Yes
+           No  2880   63
+           Yes   20   36
+                                              
+                   Accuracy : 0.9723          
+                     95% CI : (0.9658, 0.9779)
+        No Information Rate : 0.967           
+        P-Value [Acc > NIR] : 0.05364         
+                                              
+                      Kappa : 0.4514          
+     Mcnemar's Test P-Value : 4.025e-06       
+                                              
+                Sensitivity : 0.36364         
+                Specificity : 0.99310         
+             Pos Pred Value : 0.64286         
+             Neg Pred Value : 0.97859         
+                  Precision : 0.64286         
+                     Recall : 0.36364         
+                         F1 : 0.46452         
+                 Prevalence : 0.03301         
+             Detection Rate : 0.01200         
+       Detection Prevalence : 0.01867         
+          Balanced Accuracy : 0.67837         
+                                              
+           'Positive' Class : Yes             
+                                              
+
+
+# party 패키지
+
+### 모델 형성
+
+
+```R
+party.fit <- ctree(default ~ ., data = train)
+```
+
+
+```R
+plot(party.fit)
+```
+
+
+![dt7](https://www.dropbox.com/s/ffuc74emepuf55t/dt7.png?raw=1)
+
+
+### 가지치기(pruning)
+
+<code>party</code>패키지는 가지치기를 significance를 사용해서 하기 때문에 별도의 가지치기 과정이 없다.
+
+### 예측 및 평가
+
+
+```R
+party.pred <- predict(party.fit, test)
+```
+
+
+```R
+confusionMatrix(party.pred, test$default, positive = "Yes", mode = "everything")
+```
+
+
+    Confusion Matrix and Statistics
+    
+              Reference
+    Prediction   No  Yes
+           No  2871   56
+           Yes   29   43
+                                              
+                   Accuracy : 0.9717          
+                     95% CI : (0.9651, 0.9773)
+        No Information Rate : 0.967           
+        P-Value [Acc > NIR] : 0.081419        
+                                              
+                      Kappa : 0.4887          
+     Mcnemar's Test P-Value : 0.004801        
+                                              
+                Sensitivity : 0.43434         
+                Specificity : 0.99000         
+             Pos Pred Value : 0.59722         
+             Neg Pred Value : 0.98087         
+                  Precision : 0.59722         
+                     Recall : 0.43434         
+                         F1 : 0.50292         
+                 Prevalence : 0.03301         
+             Detection Rate : 0.01434         
+       Detection Prevalence : 0.02401         
+          Balanced Accuracy : 0.71217         
+                                              
+           'Positive' Class : Yes             
+                                              
+
+
