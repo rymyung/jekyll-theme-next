@@ -226,7 +226,7 @@ confusionMatrix(tree.pred, test$default, positive = "Yes", mode = "everything")
                                               
 
 
-## rpart 패키지
+## rpart package
 
 ### 모델 형성
 
@@ -338,7 +338,7 @@ confusionMatrix(rpart.pred, test$default, positive = "Yes", mode = "everything")
                                               
 
 
-# party 패키지
+## party package
 
 ### 모델 형성
 
